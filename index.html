@@ -1139,7 +1139,7 @@ const PROJECTS = [
     shots:[[G(4),'Target users'],[G(6),'Defining the problem'],[G(7),'How might we?'],[G(8),'Current flow'],[G(9),'Design requirements'],[G(11),'Create group'],[G(12),'Payment details'],[G(13),'Admin bot'],[G(15),'Group page'],[G(17),'Sales page'],[G(19),'Results & key metrics'],[G(20),'Reflections'],[G(21),'Built together']],
     results:[['3,140','creators'],['5,000+','paid groups'],['$200k+','earned for creators']],
     learned:'Two audiences, one system: every screen served both the creator and the member paying to join. Change one field in the create flow and the buyer’s sales page changed minutes later. I also learned to fail forward, sharing rough work every week instead of waiting until it felt finished.' },
-  { id:'cora', name:'Cora — AI receptionist', short:'Cora', tag:'AI · In development', color:'#ffd25e', dark:'#b47f00', bg:'#fbf6e6', year:'2025',
+  { id:'cora', url:'https://cora.parklane.xyz/', name:'Cora — AI receptionist', short:'Cora', tag:'AI · In development', color:'#ffd25e', dark:'#b47f00', bg:'#fbf6e6', year:'2025',
     kind:'Project · In development', title:'An AI receptionist <em>for small businesses</em>',
     lede:'Cora lets small businesses create AI agents that answer calls, transcribe them and save the data into their CRM. I worked with the team on the onboarding.',
     meta:{Role:'Product designer', Team:'Parklane Studios', Timeline:'2025', Platform:'Web'},
@@ -1147,7 +1147,7 @@ const PROJECTS = [
     steps:[['Onboarding','Designed the setup flow that creates a business’s first AI agent.'],['Calls to CRM','Designed how answered calls, transcripts and captured details flow into the tools businesses already use.']],
     results:[['Live soon','currently in development']],
     learned:'Case study coming once Cora launches. Happy to walk through the work on a call.' },
-  { id:'wdyt', name:'Wdyt — game', short:'Wdyt', tag:'Games', color:'#8fe0a8', dark:'#2c8a62', bg:'#eef8f1', year:'2025',
+  { id:'wdyt', url:'https://apps.apple.com/gb/app/wdyt-compare-anything/id6504518456', name:'Wdyt — game', short:'Wdyt', tag:'Games', color:'#8fe0a8', dark:'#2c8a62', bg:'#eef8f1', year:'2025',
     kind:'Project · Mobile game · Parklane Studios', title:'A game to learn <em>about your friends</em>',
     lede:'Wdyt is a game for finding out what your friends really think. I designed the shop experience, and worked on the revamped profile and settings pages.',
     meta:{Role:'Product designer', Team:'Parklane Studios', Timeline:'2025', Platform:'iOS'},
@@ -1164,6 +1164,7 @@ const QUOTES = []; // TODO: add real quotes (LinkedIn recommendations work great
    ========================================================= */
 const shade = (hex, amt) => { const n=parseInt(hex.slice(1),16); let r=(n>>16)+amt,g=(n>>8&255)+amt,b=(n&255)+amt; r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b)); return '#'+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1); };
 let gid=0;
+function projIcon(p){ return p.id==='cora'?ICON.web : p.id==='wdyt'?ICON.wdyt : folderSVG(p.color); }
 function folderSVG(c, glyph=''){
   const id='fg'+(gid++);
   return `<svg viewBox="0 0 64 52" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(c,18)}"/><stop offset="1" stop-color="${c}"/></linearGradient></defs>
@@ -1195,6 +1196,15 @@ const ICON = {
   trash: `<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M14 16h32l-3 36a4 4 0 01-4 4H21a4 4 0 01-4-4z" fill="rgba(255,255,255,.55)" stroke="rgba(120,110,130,.55)" stroke-width="1.2"/><g stroke="rgba(120,110,130,.45)" stroke-width="1.2"><path d="M22 22l1.5 28M30 22v28M38 22l-1.5 28M16 28h28M16.5 36h27M17 44h26"/></g><rect x="11" y="11" width="38" height="6" rx="2" fill="rgba(255,255,255,.7)" stroke="rgba(120,110,130,.55)" stroke-width="1.2"/><path d="M25 18c-2-6 2-9 5-6" stroke="#2142ff" stroke-width="2" fill="none"/><rect x="27" y="9" width="10" height="9" rx="1" fill="#ffd25e" transform="rotate(14 32 13)"/></svg>`,
   readme: fileSVG('TXT','#1c1a1f'),
   pdf: fileSVG('PDF','#ff4d6a'),
+  web: `<svg viewBox="0 0 52 62" aria-hidden="true"><path d="M8 2h25l15 15v39a4 4 0 01-4 4H8a4 4 0 01-4-4V6a4 4 0 014-4z" fill="#fff" stroke="rgba(0,0,0,.12)"/>
+    <path d="M33 2v11a4 4 0 004 4h11" fill="#f1edf3" stroke="rgba(0,0,0,.12)"/>
+    <rect x="10" y="22" width="32" height="22" rx="3" fill="#fbf6e6" stroke="rgba(0,0,0,.12)"/><path d="M10 25a3 3 0 013-3h26a3 3 0 013 3v2H10z" fill="#ece6d6"/>
+    <circle cx="13.5" cy="24.5" r="1" fill="#ff5f57"/><circle cx="16.5" cy="24.5" r="1" fill="#febc2e"/><circle cx="19.5" cy="24.5" r="1" fill="#28c840"/>
+    <rect x="14" y="31" width="14" height="3" rx="1.5" fill="#1c1a1f"/><rect x="14" y="37" width="9" height="3" rx="1.5" fill="#ffd25e"/>
+    <circle cx="40" cy="50" r="9" fill="#2142ff" stroke="#fff" stroke-width="2"/><g fill="none" stroke="#fff" stroke-width="1.3"><circle cx="40" cy="50" r="5.5"/><ellipse cx="40" cy="50" rx="2.4" ry="5.5"/><path d="M34.5 50h11"/></g></svg>`,
+  wdyt: SQ({defs:'<linearGradient id="iwd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b6f0c6"/><stop offset="1" stop-color="#2c8a62"/></linearGradient>',fill:'url(#iwd)'},
+    `<path d="M11 15a5 5 0 015-5h17a5 5 0 015 5v9a5 5 0 01-5 5h-10l-6 5v-5a5 5 0 01-6-5z" fill="#fff"/><text x="24.5" y="25" text-anchor="middle" font-family="Inter" font-weight="800" font-size="13" fill="#2c8a62">?</text>
+    <path d="M49 31a5 5 0 00-5-5H30a5 5 0 00-5 5v8a5 5 0 005 5h9l6 5v-5a5 5 0 004-5z" fill="#1c1a1f"/><text x="37" y="40" text-anchor="middle" font-family="Inter" font-weight="800" font-size="12" fill="#8fe0a8">!</text>`),
   jpg: `<svg viewBox="0 0 60 56" aria-hidden="true"><rect x="4" y="4" width="52" height="46" rx="3" fill="#fff" stroke="rgba(0,0,0,.12)" transform="rotate(-4 30 27)"/><rect x="9" y="9" width="42" height="32" fill="url(#jg)" transform="rotate(-4 30 27)"/><defs><linearGradient id="jg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25e"/><stop offset="1" stop-color="#6f86ff"/></linearGradient></defs><circle cx="30" cy="22" r="6" fill="#1c1a1f" opacity=".85" transform="rotate(-4 30 27)"/><path d="M18 40c3-8 21-8 24 0z" fill="#1c1a1f" opacity=".85" transform="rotate(-4 30 27)"/></svg>`,
   spotlight: SQ({fill:'#1c1a1f'},`<circle cx="27" cy="27" r="9" stroke="#fff" stroke-width="3" fill="none"/><path d="M34 34l9 9" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>`),
   moon: SQ({fill:'#2a2433'},`<path d="M40 34a12 12 0 01-14-14 12 12 0 1014 14z" fill="#ffd25e"/>`),
@@ -1334,10 +1344,10 @@ function mountFinder(w){
     const box=$('[data-view]',main);
     if(view==='grid'){
       box.className='fgrid';
-      box.innerHTML=list.map(p=>`<button class="fitem" data-open="case:${p.id}"><div class="ico">${folderSVG(p.color)}</div><b>${p.name}</b><span>${p.tag} · ${p.year}</span></button>`).join('');
+      box.innerHTML=list.map(p=>`<button class="fitem" data-open="case:${p.id}"><div class="ico">${projIcon(p)}</div><b>${p.name}</b><span>${p.tag} · ${p.year}</span></button>`).join('');
     } else {
       box.className='flist';
-      box.innerHTML=`<table><thead><tr><th>Name</th><th>Tag</th><th>Year</th><th>Outcome</th></tr></thead><tbody>${list.map(p=>`<tr data-open="case:${p.id}" tabindex="0"><td><div class="nm">${folderSVG(p.color)}${p.name}</div></td><td>${p.tag}</td><td>${p.year}</td><td><b>${p.results[0][0]}</b> ${p.results[0][1]}</td></tr>`).join('')}</tbody></table>`;
+      box.innerHTML=`<table><thead><tr><th>Name</th><th>Tag</th><th>Year</th><th>Outcome</th></tr></thead><tbody>${list.map(p=>`<tr data-open="case:${p.id}" tabindex="0"><td><div class="nm">${projIcon(p)}${p.name}</div></td><td>${p.tag}</td><td>${p.year}</td><td><b>${p.results[0][0]}</b> ${p.results[0][1]}</td></tr>`).join('')}</tbody></table>`;
     }
     $('.fstatus',main).textContent=`${list.length} item${list.length===1?'':'s'} · ∞ GB of curiosity available`;
   };
@@ -1436,7 +1446,7 @@ function readmeHTML(){
       <div class="rcard"><h6>Looking for</h6><p>Product designer · consumer, social or AI products · remote.</p></div>
     </div>
     <div class="rcard" style="margin-top:10px;background:none;padding:14px 0 0"><h6>Best work — click to open</h6></div>
-    <div class="rlist">${PROJECTS.slice(0,2).map(p=>`<button class="rlink" data-open="case:${p.id}">${folderSVG(p.color)}<div><b>${p.short}</b><small>${p.results[0][1]}</small></div><span class="num">${p.results[0][0]}</span></button>`).join('')}</div>
+    <div class="rlist">${PROJECTS.slice(0,2).map(p=>`<button class="rlink" data-open="case:${p.id}">${projIcon(p)}<div><b>${p.short}</b><small>${p.results[0][1]}</small></div><span class="num">${p.results[0][0]}</span></button>`).join('')}</div>
     <div class="racts">
       <button class="pill dark" data-open="calendar">Book a 20-min intro</button>
       <a class="pill ghost" href="${ME.resume}" target="_blank" rel="noopener">Résumé ↓</a>
@@ -1786,7 +1796,7 @@ const WINDOWS = {
 function def(id){
   if(id.startsWith('case:')){
     const p=PROJECTS.find(p=>p.id===id.slice(5)); if(!p) return null;
-    return {title:p.name, app:'Keynote', icon:()=>folderSVG(p.color), w:p.deck?1180:920,h:p.deck?780:820, html:()=>caseHTML(p), mount:p.deck?mountDeck:null, isCase:true};
+    return {title:p.name, app:'Keynote', icon:()=>projIcon(p), w:p.deck?1180:920,h:p.deck?780:820, html:()=>caseHTML(p), mount:p.deck?mountDeck:null, isCase:true};
   }
   return WINDOWS[id];
 }
@@ -1799,6 +1809,8 @@ const open = new Map(); // id -> element
 function bounds(){ const dockH=isMobile()?0:96; return {x:8,y:parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))+8,w:innerWidth-16,h:innerHeight-dockH-parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))-16}; }
 
 function openWin(id, origin, opts){
+  const link=id.startsWith('case:') && PROJECTS.find(p=>p.id===id.slice(5))?.url;
+  if(link){ closeMenu(); window.open(link,'_blank','noopener'); return; }
   const d=def(id); if(!d) return;
   closeMenu();
   // case → reuse the existing case window when navigating "next project"
@@ -1927,8 +1939,8 @@ const DESK = [
   {id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'53%'}},
   {id:'case:timeline', label:'Timeline — social', icon:folderSVG(PROJECTS[0].color), pos:{left:'4%',top:'7%'}},
   {id:'case:groupify', label:'Groupify — creators', icon:folderSVG(PROJECTS[1].color), pos:{left:'4%',top:'26%'}},
-  {id:'case:cora', label:'Cora — AI receptionist', icon:folderSVG(PROJECTS[2].color), pos:{left:'4%',top:'45%'}},
-  {id:'case:wdyt', label:'Wdyt (game)', icon:folderSVG(PROJECTS[3].color), pos:{right:'15%',bottom:'17%'}},
+  {id:'case:cora', label:'Cora — website', icon:ICON.web, pos:{left:'4%',top:'45%'}},
+  {id:'case:wdyt', label:'Wdyt — iOS app', icon:ICON.wdyt, pos:{right:'15%',bottom:'17%'}},
   ...(QUOTES.length?[{id:'notes', label:'kind words', icon:ICON.notes, pos:{right:'11%',top:'8%'}}]:[]),
 ];
 (function buildIcons(){
@@ -2052,7 +2064,7 @@ setTheme(store('theme-v2')||'light');
    SPOTLIGHT
    ========================================================= */
 const SPOT = [
-  ...PROJECTS.map(p=>({t:p.name, s:p.tag+' · case study', k:p.name+' '+p.tag+' '+p.kind+' case work project', i:folderSVG(p.color), a:'case:'+p.id})),
+  ...PROJECTS.map(p=>({t:p.name, s:p.tag+(p.url?' · opens link':' · case study'), k:p.name+' '+p.tag+' '+p.kind+' case work project', i:projIcon(p), a:'case:'+p.id})),
   {t:'READ_ME_FIRST.txt', s:'60-second summary', k:'readme summary recruiter hire quick tldr', i:ICON.readme, a:'readme'},
   {t:'Work', s:'All projects', k:'work finder projects portfolio', i:ICON.finder, a:'finder'},
   {t:'About me', s:'about_me.txt', k:'about me bio who', i:ICON.about, a:'about'},
@@ -2162,7 +2174,7 @@ $$('#wpGrid button').forEach(b=>b.onclick=()=>setWall(b.dataset.wall));
 function toggleWallPicker(force){ const p=$('#wp'), on=force??!p.classList.contains('open'); p.classList.toggle('open',on); $('#wallBtn').classList.toggle('open',on); }
 $('#wallBtn').addEventListener('click',e=>{ e.stopPropagation(); closeMenu(); toggleWallPicker(); });
 addEventListener('click',e=>{ if(!e.target.closest('#wp,#wallBtn')) toggleWallPicker(false); });
-{ const c=store('bg-custom'); if(c) document.documentElement.style.setProperty('--custom-wall',`url("${c}")`); setWall(store('bg')==='custom'&&!c?'white':store('bg')||'white'); }
+{ const c=store('bg-custom'); if(c) document.documentElement.style.setProperty('--custom-wall',`url("${c}")`); setWall(store('bg')==='custom'&&!c?'bliss':store('bg')||'bliss'); }
 applyVP();
 
 /* =========================================================
@@ -2329,7 +2341,9 @@ $('#stX').onclick=()=>toggleSet(false);
 $('#stCopy').onclick=async()=>{ const txt='Rose portfolio settings:\n'+JSON.stringify({...SET,background:document.documentElement.dataset.bg,theme:document.documentElement.dataset.theme},null,2);
   try{ await navigator.clipboard.writeText(txt); toast('Settings copied — paste them to Claude'); }catch(e){ prompt('Copy these settings:',txt); } };
 $('#stReset').onclick=()=>{ if(!confirm('Reset all designer settings?')) return; try{ localStorage.removeItem('rose-settings'); localStorage.removeItem('bg'); }catch(e){} reopenAfterReload(); location.reload(); };
-function toggleSet(force){ const on=force??!stEl.classList.contains('open'); if(on) renderSet(); stEl.classList.toggle('open',on); $('#setBtn').classList.toggle('open',on); }
+const LOCAL=['localhost','127.0.0.1'].includes(location.hostname);
+if(!LOCAL) $('#setBtn').style.display='none';
+function toggleSet(force){ if(!LOCAL) return; const on=force??!stEl.classList.contains('open'); if(on) renderSet(); stEl.classList.toggle('open',on); $('#setBtn').classList.toggle('open',on); }
 $('#setBtn').addEventListener('click',e=>{ e.stopPropagation(); closeMenu(); toggleWallPicker(false); toggleSet(); });
 addEventListener('keydown',e=>{ if((e.metaKey||e.ctrlKey) && e.key===','){ e.preventDefault(); toggleSet(); } },true);
 // drag by the header
