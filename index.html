@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Titilayo Duyile — Product Designer</title>
 <meta name="description" content="Titilayo Duyile is a product designer working on social, creator and AI products. Explore the portfolio as a tiny operating system.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.titilayoduyile.com/">
+<meta property="og:title" content="Titilayo Duyile — Product Designer">
+<meta property="og:description" content="I want to work with and learn from an exceptionally talented team, while shaping a product with real impact.">
+<meta property="og:image" content="https://www.titilayoduyile.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.titilayoduyile.com/assets/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Host+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..900,0..100;1,9..144,400..900,0..100&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -382,6 +394,15 @@ svg{display:block}
 .sv-grid button:hover img{opacity:.85}
 .sv .sv-top{position:relative;z-index:6}
 @media (max-width:760px){ .sv{padding:12px} .sv-top span,.sv-who,[data-sv="full"]{display:none} .sv-arr{width:38px;height:38px} }
+.sv-hint{display:none}
+/* phones held upright: turn the slide sideways so it fills the screen (rotate the phone to read) */
+@media (max-width:760px) and (orientation:portrait){
+  .sv{gap:8px;padding:10px 8px}
+  .sv-slides{position:absolute;left:50%;top:50%;width:min(100cqh,calc(100cqw * 16 / 9));transform:translate(-50%,-50%) rotate(90deg);border-radius:10px}
+  .sv-arr{display:none}
+  .sv-hint{display:block;position:absolute;left:50%;top:8px;translate:-50% 0;z-index:3;font-size:12px;font-weight:500;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:svhint 4s 1.5s ease forwards;pointer-events:none}
+  @keyframes svhint{to{opacity:0}}
+}
 .deck{display:grid;gap:10px;padding:10px;background:var(--paper-2)}
 .deck img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 0 0 .5px var(--line-2)}
 .case-hero{position:relative;height:340px;overflow:hidden}
@@ -815,7 +836,8 @@ svg{display:block}
   .hero-more{margin-top:12px;font-size:14px;line-height:1.55}
   .hero .ctas{margin-top:18px}
   .icons{margin-top:28px!important;gap:14px 4px!important}
-  .icons{align-items:start}
+  .icons{align-items:start;display:flex!important;flex-wrap:wrap;justify-content:center;gap:16px 0!important}
+  .icons .dicon{flex:0 0 33.333%;width:33.333%}
   .dicon[data-open="case:timeline"]{order:1} .dicon[data-open="case:groupify"]{order:2} .dicon[data-open="case:cora"]{order:3} .dicon[data-open="case:wdyt"]{order:4}
   .dicon[data-open="resume"]{order:5} .dicon[data-open="board"]{order:6}
   .dicon{justify-content:flex-start}
@@ -1443,7 +1465,7 @@ function caseHTML(p){
   if(p.deck) return `<div class="sv" tabindex="-1">
     <header class="sv-top"><b>${p.short}</b><span>${p.tag} · ${p.year}</span>
       <div class="sv-btns"><button class="sv-btn" data-open="resume">Résumé</button><button class="sv-btn" data-sv="grid">All slides</button><button class="sv-btn" data-sv="full">Full screen</button></div></header>
-    <div class="sv-stage"><div class="sv-slides">${p.deck.map((src,i)=>`<img src="${i<2?src:''}" data-src="${src}" alt="${esc(p.short)}, slide ${i+1}" class="${i?'':'on'}" draggable="false">`).join('')}</div>
+    <div class="sv-stage"><span class="sv-hint">Turn your phone sideways ↻</span><div class="sv-slides">${p.deck.map((src,i)=>`<img src="${i<2?src:''}" data-src="${src}" alt="${esc(p.short)}, slide ${i+1}" class="${i?'':'on'}" draggable="false">`).join('')}</div>
       <button class="sv-arr prev" data-sv="prev" aria-label="Previous slide"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg></button>
       <button class="sv-arr next" data-sv="next" aria-label="Next slide"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
     <footer class="sv-foot"><span class="sv-n">1 / ${p.deck.length}</span><div class="sv-bar"><i></i></div><span class="sv-who">${ME.name}, ${ME.role}</span></footer>
@@ -1499,15 +1521,16 @@ function mountDeck(w){
     const a=b.dataset.sv;
     if(a==='prev') go(i-1); else if(a==='next') go(i+1); else if(a==='grid') showGrid(grid.hidden);
     else if(a==='full'){ document.fullscreenElement?document.exitFullscreen():sv.requestFullscreen?.(); } });
-  $('.sv-slides',sv).addEventListener('click',e=>{ const r=e.currentTarget.getBoundingClientRect(); go(e.clientX-r.left<r.width/3?i-1:i+1); });
+  const side=()=>matchMedia('(max-width:760px) and (orientation:portrait)').matches; // slide turned sideways: its left edge is at the top
+  $('.sv-slides',sv).addEventListener('click',e=>{ const r=e.currentTarget.getBoundingClientRect(); go(side()?(e.clientY-r.top<r.height/3?i-1:i+1):(e.clientX-r.left<r.width/3?i-1:i+1)); });
   document.addEventListener('fullscreenchange',()=>{ $('[data-sv="full"]',sv).textContent=document.fullscreenElement===sv?'Exit full screen':'Full screen'; });
   addEventListener('keydown',function key(e){ if(!w.isConnected){ removeEventListener('keydown',key,true); return; }
     if(!w.classList.contains('front')&&document.fullscreenElement!==sv) return; if(e.target.closest&&e.target.closest('input,textarea')) return;
     if(e.key==='ArrowRight'||e.key===' '){ e.preventDefault(); go(i+1); } else if(e.key==='ArrowLeft'){ e.preventDefault(); go(i-1); }
     else if(e.key==='Escape'&&!grid.hidden){ e.stopPropagation(); showGrid(false); }
     else if(e.key==='Escape'&&document.fullscreenElement){ e.stopPropagation(); } },true);
-  let sx=null; sv.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
-  sv.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) go(dx<0?i+1:i-1); sx=null; });
+  let sx=null; sv.addEventListener('touchstart',e=>sx=side()?e.touches[0].clientY:e.touches[0].clientX,{passive:true});
+  sv.addEventListener('touchend',e=>{ if(sx===null) return; const dx=(side()?e.changedTouches[0].clientY:e.changedTouches[0].clientX)-sx; if(Math.abs(dx)>40) go(dx<0?i+1:i-1); sx=null; });
   load(1); $('.prev',sv).disabled=true; $('.sv-bar i',sv).style.width=(1/n*100)+'%';
 }
 
@@ -1896,7 +1919,7 @@ function resumeHTML(){
   return `<div class="pv"><div class="page">
     <h1>${ME.name}</h1><div class="role">${ME.role}</div>
     <div class="ct"><span>${ME.email}</span><a href="${ME.linkedin}" target="_blank" rel="noopener">LinkedIn</a><a href="${ME.resume}" target="_blank" rel="noopener">Download PDF ↓</a></div>
-    <p style="margin-top:14px">I am self-taught and passionate about design, and I love creating solutions for complex problems. I want to develop impactful products that make life easier.</p>
+    <p style="margin-top:14px">I want to work with and learn from an exceptionally talented team, while shaping a product with real impact. I make complex problems simple: I turn research into clear flows, prototype quickly and hand off cleanly to engineering.</p>
     <h2>Experience</h2>
     <div class="job"><div class="when">Jan 2025 — now</div><div><b>Product Designer · Parklane Studios, UK</b><ul><li>Team of 10 launching games, social and AI products.</li><li>Designed social features for Timeline to drive growth: tens of thousands of downloads.</li><li>Ran user research calls, then prioritised pain points with the product team.</li><li>Hand-off of final designs between design and engineering.</li></ul></div></div>
     <div class="job"><div class="when">Nov 2024 — Dec 2025</div><div><b>Associate Product Designer · Groupify, Nigeria</b><ul><li>7-person team building tools for creators to run online communities.</li><li>End-to-end user research and Figma UI, reducing cognitive load for users.</li><li>Worked in a design team with design systems and prototypes.</li></ul></div></div>
@@ -1928,10 +1951,10 @@ function mountMail(w){
   setTimeout(()=>{ ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); },350);
 }
 
-const TRASHED = [['dark_patterns.fig','#1c1a1f'],['confirmshaming_copy.txt','#ff4d6a'],['autoplay_carousel_v9.mov','#8d74f2'],['lorem_ipsum_FINAL.doc','#3f8ff0'],['10_more_modals.sketch','#e2ab12'],['hamburger_on_desktop.png','#3fb985']];
+const TRASHED = [['timeline_feed_v1.fig','#7ab8f5'],['timeline_onboarding_v1.fig','#7ab8f5'],['groupify_checkout_v1.fig','#8d74f2'],['groupify_sales_page_v1.fig','#8d74f2'],['cora_setup_flow_v1.fig','#e2ab12'],['wdyt_shop_v1.fig','#2c8a62'],['dark_patterns.fig','#1c1a1f'],['lorem_ipsum_FINAL.doc','#3f8ff0']];
 function trashHTML(){
   return `<div style="display:flex;flex-direction:column;height:100%"><div class="trash" style="flex:1;overflow:auto">${TRASHED.map(([n,c])=>`<div class="fitem"><div class="ico">${fileSVG(n.split('.').pop().toUpperCase().slice(0,4),c)}</div><span style="color:var(--ink);font-size:12px;word-break:break-word">${n}</span></div>`).join('')}</div>
-  <div class="trash-foot"><span>Things I’ve learned not to ship.</span><button class="tbtn" data-empty>Empty Trash</button></div></div>`;
+  <div class="trash-foot"><span>First versions that didn’t make the cut.</span><button class="tbtn" data-empty>Empty Trash</button></div></div>`;
 }
 
 /* =========================================================
@@ -2097,11 +2120,11 @@ document.addEventListener('keydown',e=>{
    ========================================================= */
 const DESK = [
   {id:'resume', label:'résumé.pdf', icon:ICON.pdf, pos:{right:'2.2%',top:'21%'}},
-  ...(ON_MAC?[{id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'53%'}}]:[]),
+  ...(ON_MAC?[{id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'40%'}}]:[]),
   {id:'case:timeline', label:'Timeline — social', icon:folderSVG(PROJECTS[0].color), pos:{left:'4%',top:'7%'}},
   {id:'case:groupify', label:'Groupify — creators', icon:folderSVG(PROJECTS[1].color), pos:{left:'4%',top:'26%'}},
   {id:'case:cora', label:'Cora — website', icon:ICON.web, pos:{left:'4%',top:'45%'}},
-  {id:'case:wdyt', label:'Wdyt — iOS app', icon:ICON.wdyt, pos:{right:'15%',bottom:'17%'}},
+  {id:'case:wdyt', label:'Wdyt — iOS app', icon:ICON.wdyt, pos:{left:'4%',top:'64%'}},
   ...(QUOTES.length?[{id:'notes', label:'kind words', icon:ICON.notes, pos:{right:'11%',top:'8%'}}]:[]),
 ];
 (function buildIcons(){
