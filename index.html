@@ -168,6 +168,18 @@ svg{display:block}
 .sp-photos{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);opacity:0;transition:opacity .9s}
 .sp-photos.on{opacity:1}.sp-photos img{width:100%;height:100%;object-fit:cover;display:block}
 .sp-photos::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#121212 0,rgba(18,18,18,.55) 55%,rgba(18,18,18,.25)),linear-gradient(to right,rgba(18,18,18,.6),transparent 60%)}
+.sp-cover.vinyl{box-shadow:none;border-radius:50%;overflow:visible;position:relative;touch-action:none;cursor:grab}
+.sp-cover.vinyl:active{cursor:grabbing}
+.vinyl .disc{width:100%;height:100%;border-radius:50%;background:repeating-radial-gradient(circle,#111 0 1.5px,#1d1d1d 1.5px 3px);box-shadow:0 10px 40px rgba(0,0,0,.55),inset 0 0 0 2px #000;position:relative;will-change:transform}
+.vinyl::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 30deg,transparent 0 10%,rgba(255,255,255,.14) 14%,transparent 20% 60%,rgba(255,255,255,.1) 64%,transparent 70%)}
+.vinyl .lbl{position:absolute;inset:31%;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #0b0b0b}
+.vinyl .lbl svg,.vinyl .lbl img{width:100%;height:100%;object-fit:cover;display:block}
+.vinyl .lbl::after{content:"";position:absolute;left:50%;top:50%;width:9%;height:9%;margin:-4.5%;border-radius:50%;background:#121212}
+.vinyl .hint{position:absolute;left:50%;bottom:-24px;translate:-50% 0;font-size:11px;color:rgba(255,255,255,.6);white-space:nowrap;opacity:0;transition:opacity .3s}
+.vinyl:hover .hint{opacity:1}
+.sp-note-fx{position:fixed;z-index:3000;pointer-events:none;color:#1ed760;font-size:22px;font-weight:700;animation:notefx 1.2s ease-out forwards;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+@keyframes notefx{from{opacity:1;transform:translate(0,0) scale(.7)}to{opacity:0;transform:translate(var(--x),-90px) scale(1.25) rotate(var(--r))}}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
 .sp-cover{width:clamp(120px,22%,200px);aspect-ratio:1;flex:none;box-shadow:0 8px 40px rgba(0,0,0,.5);border-radius:4px;overflow:hidden}
 .sp-cover svg,.th svg{width:100%;height:100%;display:block}
 .sp-hero small{font-size:13px}
@@ -445,13 +457,13 @@ svg{display:block}
 .txt-foot{display:flex;justify-content:space-between;padding:6px 14px;font:500 11px "JetBrains Mono",monospace;color:var(--dim);border-top:.5px solid var(--line);background:var(--win-bar);flex:none}
 
 /* README */
-.ab{padding:26px 30px 30px;display:flex;flex-direction:column;gap:18px}
+.ab{padding:26px 30px 30px;max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
 .ab-head{display:flex;gap:18px;align-items:center}
-.ab-head h1{font:400 36px/1.05 "Host Grotesk",sans-serif}
+.ab-head h1{font:400 34px/1.08 "Host Grotesk",sans-serif}
 .ab-head p{color:var(--dim);margin-top:4px}
-.ab .wave{display:inline-block;font:inherit;transform-origin:70% 80%;animation:wave 1.4s .4s ease-in-out 3;cursor:pointer}
-.ab-head:hover .wave,.ab .wave:focus-visible{animation:wave 1.1s ease-in-out infinite}
-.ab .wave:active{scale:1.3}
+.ab-head .wave{display:inline-block;font:inherit;transform-origin:70% 80%;animation:wave 1.4s .4s ease-in-out 3;cursor:pointer}
+.ab-head:hover .wave,.ab-head .wave:focus-visible{animation:wave 1.1s ease-in-out infinite}
+.ab-head .wave:active{scale:1.3}
 .ab-head .ava{transition:transform .4s var(--ease-out)}.ab-head:hover .ava{transform:rotate(-6deg) scale(1.04)}
 .ab-pop{position:fixed;z-index:3000;pointer-events:none;font-size:22px;animation:abpop 1.1s var(--ease-out) forwards}
 @keyframes abpop{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.2) rotate(var(--r))}}
@@ -472,7 +484,8 @@ svg{display:block}
 .ab-qs button.all{border-style:dashed}
 .ab-qs.wait button{opacity:.45;pointer-events:none}
 .ab .racts{margin-top:4px}
-.readme{padding:28px 32px 36px}
+.readme{padding:28px 32px 36px;max-width:720px;margin:0 auto}
+.readme .ab-head{margin-bottom:4px}
 .readme h1{font:400 38px/1.05 "Host Grotesk",sans-serif}
 .readme h1 em{color:var(--dim);font-style:normal}
 .readme .tl{margin-top:10px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
@@ -527,14 +540,24 @@ svg{display:block}
 .sc-sort span{padding:14px 12px;min-height:74px;background:#fff1a6;font:600 19px/1.05 Caveat,cursive;color:#3a3200;box-shadow:0 8px 16px -10px rgba(60,40,0,.4);animation:pop .45s var(--ease-out) both, sortit .6s var(--ease-out) both;animation-delay:calc(var(--i) * .12s), calc(1.6s + var(--i) * .1s)}
 .sc-sort span:nth-child(1){--to:#ffd0c2}.sc-sort span:nth-child(2){--to:#ffd0c2}.sc-sort span:nth-child(3){--to:#d9ebff}
 @keyframes sortit{to{background:var(--to,#fff1a6);rotate:calc((var(--i) - 2) * 1.5deg)}}
-.sc-flow{width:min(440px,90%)}
-.sc-flow rect{fill:#fff;stroke:#9747ff;stroke-width:2;animation:pop .45s var(--ease-out) both;animation-delay:calc(var(--i) * .22s);transform-box:fill-box;transform-origin:center}
-.sc-flow .ln{stroke:#9747ff;stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.8s .9s var(--ease-out) forwards}
+.sc-flow{width:min(460px,92%)}
+.sc-flow g g{animation:pop .45s var(--ease-out) both;animation-delay:calc(var(--i) * .35s);transform-box:fill-box;transform-origin:center}
+.sc-flow rect{fill:#fff;stroke:#9747ff;stroke-width:2}
+.sc-flow text{font:600 12.5px Inter,sans-serif;fill:#1e1e1e}
+.sc-flow .ln{stroke:#9747ff;stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600;animation:draw 2.2s .5s ease-in-out forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
-.sc-phone .ph{width:170px;height:320px;border-radius:28px;background:#fff;border:6px solid #1e1e1e;padding:34px 16px 16px;display:flex;flex-direction:column;gap:12px}
-.sc-phone i{display:block;height:12px;width:var(--w,100%);border-radius:6px;background:#e7e7e7;animation:pop .4s var(--ease-out) both;animation-delay:calc(var(--i) * .35s)}
-.sc-phone i.img{height:110px;border-radius:12px;background:linear-gradient(135deg,#b8a6ff,#7ab8f5)}
-.sc-phone b{margin-top:auto;display:grid;place-items:center;height:40px;border-radius:12px;background:#0a0a0a;color:#fff;font-size:13px;animation:pop .4s var(--ease-out) both;animation-delay:calc(var(--i) * .35s)}
+.sc-phone{position:relative}
+.sc-phone .ph{width:180px;height:340px;border-radius:30px;background:#fff;border:6px solid #1e1e1e;padding:26px 12px 10px;display:flex;flex-direction:column;gap:10px;overflow:hidden;font-family:Inter,sans-serif}
+.sc-phone .ph>*{animation:pop .45s var(--ease-out) both;animation-delay:calc(.2s + var(--i) * .45s)}
+.ap-top{display:flex;justify-content:space-between;align-items:center;font-size:14px}.ap-top span{font-size:15px}
+.ap-stories{display:flex;gap:8px}.ap-stories i{width:30px;height:30px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #fff,0 0 0 3.5px #ff5a8a}
+.ap-post{border-radius:14px;background:#f6f6f6;padding:8px;display:flex;flex-direction:column;gap:7px}
+.ap-who{display:flex;align-items:center;gap:6px;font-size:11px}.ap-who i{width:18px;height:18px;border-radius:50%;background:#b8a6ff}.ap-who small{margin-left:auto;color:#999;font-size:10px}
+.ap-img{height:110px;border-radius:10px;background:linear-gradient(160deg,#ffd25e,#ff8a5c 55%,#7a4fd6)}
+.ap-acts{display:flex;gap:12px;font-size:11px;color:#555}.ap-acts .hrt{color:#ff3b6b;animation:like .5s 2.2s var(--ease-out) both}
+.ap-tab{margin-top:auto;display:flex;justify-content:space-around;padding-top:8px;border-top:1px solid #eee}.ap-tab i{width:16px;height:16px;border-radius:5px;background:#ddd}.ap-tab i.on{background:#1e1e1e}
+.ap-note{position:absolute;right:-118px;top:70px;padding:12px;width:110px;background:#fff1a6;font:600 17px/1.1 Caveat,cursive;color:#3a3200;transform:rotate(4deg);box-shadow:0 8px 16px -10px rgba(60,40,0,.4);animation:pop .45s 2.6s var(--ease-out) both}
+@keyframes like{0%{transform:scale(1)}40%{transform:scale(1.5)}100%{transform:scale(1)}}
 .sc-ship{display:flex;flex-direction:column;align-items:center;gap:16px}
 .sc-ship .card{width:300px;background:#fff;border-radius:16px;padding:18px;box-shadow:0 14px 40px -18px rgba(0,0,0,.35);color:#0a0a0a}
 .sc-ship .hd{display:flex;align-items:center;justify-content:space-between;font-size:13px}
@@ -782,8 +805,15 @@ svg{display:block}
   .sticky-note{position:static;margin:28px auto 0;transform:rotate(-2deg)}
   .doodle{display:none}
   .dock-wrap{bottom:calc(10px + env(safe-area-inset-bottom))}
-  .dock{gap:10px;height:76px;padding:10px 12px;border-radius:28px;max-width:calc(100vw - 24px)}
-  .dk{width:54px!important;height:54px!important}
+  .dock{gap:6px;height:auto;padding:8px 10px;border-radius:24px;width:calc(100vw - 24px);max-width:calc(100vw - 24px);justify-content:space-between}
+  .dk{width:auto!important;height:auto!important;flex:1 1 0;min-width:0;max-width:54px;aspect-ratio:1}
+  .hero-name{font-size:22px}
+  .hero-lead{margin-top:12px;font-size:clamp(19px,5.6vw,24px);line-height:1.28}
+  .hero-more{margin-top:12px;font-size:14px;line-height:1.55}
+  .hero .ctas{margin-top:18px}
+  .icons{margin-top:28px!important;gap:14px 4px!important}
+  .dicon .ico{width:50px!important;height:46px!important}
+  .dicon .lbl{font-size:10.5px!important}
   .dk.hide-sm,.dsep{display:none}
   .dk .tip{display:none}
   .wins{position:fixed;z-index:1000}
@@ -1480,9 +1510,19 @@ const ABOUT_QA = [
   {q:'What do you do outside work?', a:[ABOUT[3]]},
   {q:'What matters most to you?', a:[ABOUT[4]]},
 ];
+const greetHTML=sub=>`<div class="ab-head"><div class="ava">${avatarHTML()}</div><div><h1>Hi hi, you can call me Titi <button class="wave" aria-label="Wave back">👋</button></h1>${sub?`<p>${sub}</p>`:''}</div></div>`;
+// the wave: waves on open, on hover, and bursts into hellos when tapped
+function wireGreet(w){
+  const burst=el=>{ if(reduce) return; const r=el.getBoundingClientRect();
+    ['👋','✨','💛','👋','🎉','👋','💫','😊'].forEach((e,i)=>{ const s=document.createElement('span'); s.className='ab-pop'; s.textContent=e;
+      const a=i/8*Math.PI*2; s.style.cssText=`left:${r.left+r.width/2-11}px;top:${r.top+r.height/2-14}px;--x:${Math.cos(a)*90}px;--y:${Math.sin(a)*70-30}px;--r:${(i%2?1:-1)*40}deg`;
+      document.body.append(s); setTimeout(()=>s.remove(),1200); }); };
+  $('.wave',w).addEventListener('click',e=>{ burst(e.currentTarget); toast('Hi hi! 👋'); });
+  setTimeout(()=>w.isConnected&&burst($('.wave',w)),500);
+}
 function aboutHTML(){
   return `<div class="ab">
-    <div class="ab-head"><div class="ava">${avatarHTML()}</div><div><h1>Hi hi, you can call me Titi <button class="wave" aria-label="Wave back">👋</button></h1><p>A product designer living in east London.</p></div></div>
+    ${greetHTML('A product designer living in east London.')}
     <div class="ab-chat" aria-live="polite"><div class="bub me">Ask me anything below. I don’t bite 🙂</div></div>
     <div class="ab-qs">${ABOUT_QA.map((x,i)=>`<button data-q="${i}">${x.q}</button>`).join('')}<button data-q="all" class="all">Show me everything</button></div>
     <div class="racts"><button class="pill dark" data-open="resume">Résumé</button><button class="pill ghost" data-open="mail">Say hello</button></div>
@@ -1490,13 +1530,7 @@ function aboutHTML(){
 }
 function mountAbout(w){
   const chat=$('.ab-chat',w), qs=$('.ab-qs',w); let busy=false;
-  // tap the wave for a little burst of hellos
-  const burst=el=>{ if(reduce) return; const r=el.getBoundingClientRect();
-    ['👋','✨','💛','👋','🎉','👋','💫','😊'].forEach((e,i)=>{ const s=document.createElement('span'); s.className='ab-pop'; s.textContent=e;
-      const a=i/8*Math.PI*2; s.style.cssText=`left:${r.left+r.width/2-11}px;top:${r.top+r.height/2-14}px;--x:${Math.cos(a)*90}px;--y:${Math.sin(a)*70-30}px;--r:${(i%2?1:-1)*40}deg`;
-      document.body.append(s); setTimeout(()=>s.remove(),1200); }); };
-  $('.wave',w).addEventListener('click',e=>{ burst(e.currentTarget); toast('Hi hi! 👋'); });
-  setTimeout(()=>w.isConnected&&burst($('.wave',w)),500);
+  wireGreet(w);
   const add=(cls,html)=>{ const b=document.createElement('div'); b.className='bub '+cls; b.innerHTML=html; chat.append(b); b.scrollIntoView({block:'nearest',behavior:'smooth'}); return b; };
   const answer=async i=>{ const x=ABOUT_QA[i]; $(`[data-q="${i}"]`,qs)?.remove(); add('you',x.q);
     for(const part of x.a){ const t=add('me typing','<i></i><i></i><i></i>'); await new Promise(r=>setTimeout(r,reduce?0:650));
@@ -1509,7 +1543,7 @@ function mountAbout(w){
 
 function readmeHTML(){
   return `<div class="readme">
-    <h1>Hi there 👋</h1>
+    ${greetHTML('')}
     <p class="tl">I’m ${ME.first}. I want to work with and learn from an exceptionally talented team, while shaping a product with real impact.</p>
     <div class="rgrid">
       <div class="rcard"><h6>I’m great at</h6><p>Making complex problems simple. I turn research into clear flows, prototype quickly and hand off cleanly to engineering.</p></div>
@@ -1543,9 +1577,15 @@ const SCENES = [
   `<div class="sc-people">${['#ffd25e','#b8a6ff','#8fe0a8','#7ab8f5','#ffb3a1','#f5c2e0'].map((c,i)=>`<i style="--c:${c};--i:${i}"></i>`).join('')}
     <span class="bub" style="--i:0">“I didn’t know where to start”</span><span class="bub" style="--i:1">“Why does this take so long?”</span><span class="bub" style="--i:2">“I just want it to work”</span></div>`,
   `<div class="sc-sort">${['too many steps','unclear cost','where do I start?','platform limits','no feedback','too many steps'].map((t,i)=>`<span style="--i:${i}">${t}</span>`).join('')}</div>`,
-  `<svg class="sc-flow" viewBox="0 0 420 220" fill="none"><g class="nodes">${[[20,90],[130,30],[130,150],[250,90],[350,90]].map(([x,y],i)=>`<rect style="--i:${i}" x="${x}" y="${y}" width="70" height="40" rx="9"/>`).join('')}</g>
-    <path class="ln" d="M90 110C110 110 110 50 130 50M90 110C110 110 110 170 130 170M200 50C225 50 225 110 250 110M200 170C225 170 225 110 250 110M320 110H350"/></svg>`,
-  `<div class="sc-phone"><div class="ph"><i style="--i:0;--w:60%"></i><i class="img" style="--i:1"></i><i style="--i:2;--w:90%"></i><i style="--i:3;--w:70%"></i><b style="--i:4">Continue</b></div></div>`,
+  `<svg class="sc-flow" viewBox="0 0 440 220" fill="none"><path class="ln" d="M96 110C116 110 116 50 136 50M96 110C116 110 116 170 136 170M226 50C246 50 246 110 266 110M226 170C246 170 246 110 266 110M356 110H370"/>
+    <g class="nodes">${[[16,90,'Sign up'],[136,30,'Browse'],[136,150,'Invite'],[266,90,'Join group'],[370,90,'Done ✓']].map(([x,y,t],i)=>`<g style="--i:${i}"><rect x="${x}" y="${y}" width="${i===4?62:90}" height="40" rx="9"/><text x="${x+(i===4?31:45)}" y="${y+25}" text-anchor="middle">${t}</text></g>`).join('')}</g></svg>`,
+  `<div class="sc-phone"><div class="ph">
+    <div class="ap-top" style="--i:0"><b>Timeline</b><span>＋</span></div>
+    <div class="ap-stories" style="--i:1">${['#ffd25e','#b8a6ff','#8fe0a8','#ffb3a1'].map(c=>`<i style="--c:${c}"></i>`).join('')}</div>
+    <div class="ap-post" style="--i:2"><div class="ap-who"><i></i><b>Ada</b><small>2h</small></div><div class="ap-img"></div>
+      <div class="ap-acts"><span class="hrt">♥ 24</span><span>💬 6</span></div></div>
+    <div class="ap-tab" style="--i:3"><i class="on"></i><i></i><i></i><i></i></div>
+  </div><span class="ap-note">Tested with 5 people ✓</span></div>`,
   `<div class="sc-ship"><div class="card"><div class="hd"><b>v1.2</b><span>Shipped</span></div>
     <div class="bars">${[38,52,46,70,84,100].map((h,i)=>`<i style="--h:${h}%;--i:${i}"></i>`).join('')}</div>
     <div class="ft"><span>Activation</span><b>+24%</b></div></div>
@@ -1560,15 +1600,16 @@ function boardHTML(){
   </div>`;
 }
 function mountBoard(w){
-  const root=$('#hiw',w); let i=0, t=null, paused=false;
+  const root=$('#hiw',w), STEP=4200; let i=0, t=null, paused=false, left=STEP, started=0;
+  const tick=ms=>{ clearTimeout(t); left=ms; started=Date.now(); if(!paused && !reduce) t=setTimeout(()=>go(i+1),ms); };
   const go=n=>{ i=(n+STEPS.length)%STEPS.length;
     $$('[data-step]',root).forEach((b,j)=>{ b.classList.toggle('on',j===i); b.classList.toggle('done',j<i); });
     $$('.scene',root).forEach((sc,j)=>{ sc.classList.remove('on'); if(j===i){ void sc.offsetWidth; sc.classList.add('on'); } });
     $('.hiw-zoom b',root).textContent=['1×','4×','16×','64×','256×'][i];
-    clearTimeout(t); if(!paused && !reduce) t=setTimeout(()=>go(i+1),4200); };
+    tick(STEP); };
   root.addEventListener('click',e=>{ const b=e.target.closest('[data-step]'); if(b) go(+b.dataset.step); });
-  root.addEventListener('mouseenter',()=>{ paused=true; root.classList.add('paused'); clearTimeout(t); });
-  root.addEventListener('mouseleave',()=>{ paused=false; root.classList.remove('paused'); go(i+1); });
+  root.addEventListener('mouseenter',()=>{ paused=true; root.classList.add('paused'); clearTimeout(t); left=Math.max(0,left-(Date.now()-started)); });
+  root.addEventListener('mouseleave',()=>{ paused=false; root.classList.remove('paused'); tick(left); });
   go(0);
 }
 
@@ -1627,15 +1668,15 @@ const spi = (n,s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fil
 const PLAY='<svg viewBox="0 0 24 24" width="20" height="20"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>', PAUSE='<svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z" fill="currentColor"/></svg>';
 function musicHTML(){
   return `<div class="sp">
-    <header class="sp-top"><span class="sp-logo">${ICON.spotify}</span><button class="sp-circ" aria-label="Home">${spi('home',20)}</button>
+    <header class="sp-top"><span class="sp-logo">${ICON.spotify}</span>
       <label class="sp-search">${spi('search',20)}<input placeholder="What do you want to play?" aria-label="Search"></label>
       <span class="sp-r"><span class="sp-me">${ME.first[0]}</span></span></header>
     <div class="sp-mid">
       <main class="sp-main">
-        <section class="sp-hero" style="--hc:${ART.repeat.c}"><div class="sp-photos" aria-hidden="true"></div><div class="sp-cover">${artSVG('repeat')}</div><div><small>Public Playlist</small><h2>On Repeat</h2><p>What plays while I design. Mostly Beyoncé, no apologies.</p><span class="sp-by"><b>${ME.first}</b> · ${TRACKS.length} songs, about 32 min</span></div></section>
+        <section class="sp-hero" style="--hc:${ART.repeat.c}"><div class="sp-photos" aria-hidden="true"></div><div class="sp-cover vinyl" title="Drag to scratch"><div class="disc"><div class="lbl">${artSVG(TRACKS[0].k)}</div></div><span class="hint">Drag to scratch</span></div><div><small>Public Playlist</small><h2>On Repeat</h2><p>What plays while I design. Mostly Beyoncé, no apologies.</p><span class="sp-by"><b>${ME.first}</b> · ${TRACKS.length} songs, about 32 min</span></div></section>
         <div class="sp-body"><div class="sp-acts"><button class="sp-play" data-sp="toggle" aria-label="Play">${PLAY}</button><button class="sp-ic big" data-sp="shuffle" aria-label="Shuffle">${spi('shuffle',26)}</button><a class="sp-ic big" href="https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m" target="_blank" rel="noopener" aria-label="Open in Spotify">•••</a></div>
           <div class="sp-th"><span>#</span><span>Title</span><span>Album</span><span>${spi('clock',16)}</span></div>
-          <ol class="sp-list">${TRACKS.map((t,i)=>`<li><button data-tr="${i}"><span class="n"><i>${i+1}</i><em>${PLAY}</em></span><span class="tt"><span class="th">${artSVG(t.k)}</span><span><b>${t.t}</b><small>${t.a}</small></span></span><span class="al">${t.al}</span><span class="du">${t.d}</span></button></li>`).join('')}</ol>
+          <ol class="sp-list">${TRACKS.map((t,i)=>`<li><button data-tr="${i}"><span class="n"><i>${i+1}</i><em>${PLAY}</em></span><span class="tt"><span class="th" data-art="${i}">${artSVG(t.k)}</span><span><b>${t.t}</b><small>${t.a}</small></span></span><span class="al">${t.al}</span><span class="du">${t.d}</span></button></li>`).join('')}</ol>
           <p class="sp-note">30-second previews · <a href="https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m" target="_blank" rel="noopener">listen on Spotify</a></p></div>
       </main></div>
     <footer class="sp-bar"><div class="sp-now"><span class="th">${artSVG(TRACKS[0].k)}</span><span><b>${TRACKS[0].t}</b><small>${TRACKS[0].a}</small></span><button class="sp-ic" aria-label="Save">${spi('plus')}</button></div>
@@ -1653,15 +1694,20 @@ function mountMusic(w){
     box.innerHTML=pics.map(a=>`<img alt="" src="${a.artworkUrl100.replace('100x100bb','600x600bb')}">`).join('');
     Promise.all([...box.querySelectorAll('img')].map(i=>i.decode().catch(()=>{}))).then(()=>box.classList.add('on'));
   }).catch(()=>{});
-  const audio=new Audio(); audio.volume=.7; let cur=0, playing=false, shuffle=false, urls={};
+  const audio=new Audio(); audio.volume=.7; let cur=0, playing=false, shuffle=false, urls={}, arts={};
+  const artFor=t=>arts[t.k]?`<img alt="" src="${arts[t.k]}">`:artSVG(t.k);
+  // real song artwork + preview link for every track, from Apple's catalogue
+  async function look(t){ if(t.k in urls) return;
+    const r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent('Beyonce '+t.t)}&media=music&entity=song&limit=5`).then(r=>r.json()).catch(()=>({}));
+    const hit=(r.results||[]).find(x=>/beyonc/i.test(x.artistName)&&x.previewUrl)||{};
+    urls[t.k]=hit.previewUrl; if(hit.artworkUrl100) arts[t.k]=hit.artworkUrl100.replace('100x100bb','300x300bb'); }
+  TRACKS.forEach((t,i)=>look(t).then(()=>{ if(!arts[t.k]||!w.isConnected) return; $(`[data-art="${i}"]`,w).innerHTML=artFor(t); if(i===cur) ui(); }));
   const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
   const ui=()=>{ const t=TRACKS[cur];
-    $('.sp-now .th',w).innerHTML=artSVG(t.k); $('.sp-now b',w).textContent=t.t; $('.sp-now small',w).textContent=t.a;
+    $('.sp-now .th',w).innerHTML=artFor(t); $('.vinyl .lbl',w).innerHTML=artFor(t); w.classList.toggle('sp-on',playing); $('.sp-now b',w).textContent=t.t; $('.sp-now small',w).textContent=t.a;
     $$('[data-tr]',w).forEach((b,i)=>{ b.classList.toggle('on',i===cur); b.classList.toggle('playing',i===cur&&playing); });
     $$('[data-sp="toggle"]',w).forEach(b=>{ b.innerHTML=playing?PAUSE:PLAY; b.setAttribute('aria-label',playing?'Pause':'Play'); }); };
-  async function src(t){ if(urls[t.k]) return urls[t.k];
-    const r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent('Beyonce '+t.t)}&media=music&entity=song&limit=5`).then(r=>r.json());
-    const hit=(r.results||[]).find(x=>/beyonc/i.test(x.artistName)&&x.previewUrl)||{}; return urls[t.k]=hit.previewUrl; }
+  async function src(t){ await look(t); return urls[t.k]; }
   async function play(i){ cur=(i+TRACKS.length)%TRACKS.length; playing=true; ui();
     try{ const u=await src(TRACKS[cur]); if(!u) throw 0; if(audio.src!==u) audio.src=u; await audio.play(); }catch(e){ playing=false; ui(); toast('Preview unavailable, try Spotify'); } }
   const toggle=()=>{ if(playing){ audio.pause(); playing=false; ui(); } else if(audio.src){ audio.play(); playing=true; ui(); } else play(cur); };
@@ -1675,6 +1721,27 @@ function mountMusic(w){
     else if(a==='repeat'){ audio.loop=!audio.loop; b.classList.toggle('on',audio.loop); } });
   $('.sp-prog .track',w).addEventListener('click',e=>{ if(!audio.duration) return; const r=e.currentTarget.getBoundingClientRect(); audio.currentTime=(e.clientX-r.left)/r.width*audio.duration; });
   $('.sp-vol input',w).addEventListener('input',e=>audio.volume=+e.target.value);
+  // the record: spins while playing; drag it to scratch (synth scratch sound + music notes)
+  const vin=$('.vinyl',w), disc=$('.disc',vin); let ang=0, last=performance.now(), drag=null, ac=null, sc=null;
+  const spin=now=>{ if(!w.isConnected) return; const dt=now-last; last=now; if(!drag && playing) ang+=dt*.2; disc.style.transform=`rotate(${ang}deg)`; requestAnimationFrame(spin); };
+  requestAnimationFrame(spin);
+  const scratchOn=()=>{ try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); ac.resume();
+    const len=ac.sampleRate*2, buf=ac.createBuffer(1,len,ac.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*.6+Math.sin(i/ac.sampleRate*2*Math.PI*110*(1+Math.sin(i/900)*.3))*.5;
+    const n=ac.createBufferSource(); n.buffer=buf; n.loop=true; const f=ac.createBiquadFilter(); f.type='bandpass'; f.Q.value=2.5; const g=ac.createGain(); g.gain.value=0;
+    n.connect(f).connect(g).connect(ac.destination); n.start(); sc={n,f,g}; }catch(e){ sc=null; } };
+  const scratchOff=()=>{ if(!sc) return; const {n,g}=sc; g.gain.setTargetAtTime(0,ac.currentTime,.03); setTimeout(()=>n.stop(),200); sc=null; };
+  const note=()=>{ if(reduce) return; const r=vin.getBoundingClientRect(), e=document.createElement('span'); e.className='sp-note-fx'; e.textContent=['♪','♫','♬','♩'][Math.floor(Math.random()*4)];
+    e.style.cssText=`left:${r.left+r.width*(.2+Math.random()*.6)}px;top:${r.top+r.height*.3}px;--x:${(Math.random()-.5)*120}px;--r:${(Math.random()-.5)*60}deg`; document.body.append(e); setTimeout(()=>e.remove(),1300); };
+  const angleAt=e=>{ const r=vin.getBoundingClientRect(); return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI; };
+  let noteT=0, vol0=audio.volume;
+  vin.addEventListener('pointerdown',e=>{ e.preventDefault(); vin.setPointerCapture(e.pointerId); drag={a:angleAt(e),t:performance.now()}; vol0=audio.volume; audio.volume=vol0*.25; scratchOn(); });
+  vin.addEventListener('pointermove',e=>{ if(!drag) return; const a=angleAt(e), now=performance.now(); let da=a-drag.a; if(da>180) da-=360; if(da<-180) da+=360;
+    ang+=da; const v=Math.min(1,Math.abs(da)/Math.max(1,now-drag.t)/1.2); drag={a,t:now};
+    if(sc){ sc.g.gain.setTargetAtTime(v*.5,ac.currentTime,.01); sc.f.frequency.setTargetAtTime(400+v*2600*(da>0?1:.6),ac.currentTime,.01); sc.n.playbackRate.setTargetAtTime(.5+v*1.8,ac.currentTime,.01); }
+    if(v>.15 && now-noteT>90){ noteT=now; note(); } });
+  const end=()=>{ if(!drag) return; drag=null; audio.volume=vol0; scratchOff(); };
+  vin.addEventListener('pointerup',end); vin.addEventListener('pointercancel',end);
   ui();
 }
 
@@ -1758,7 +1825,7 @@ const H0=9, H1=18, HPX=52;
 function calendarHTML(){
   return `<div class="cal"><aside class="cal-side"><div><div class="mm-h" id="mmH"></div><div class="mm" id="mm"></div></div>
     <div class="legend"><div><i style="background:var(--green)"></i>Open for an intro chat</div><div><i style="background:var(--lilac)"></i>Deep work</div><div><i style="background:var(--pink)"></i>Team rituals</div><div><i style="background:#e0ad1e"></i>Life stuff</div></div>
-    <div class="cal-cta"><b>Grab a green slot ✦</b>Any time that isn’t taken is open. Click a green slot and I’ll get an email with that time. Slots are in my local time — flexible for time zones.</div></aside>
+    <div class="cal-cta"><b>Grab a green slot ✦</b>Tap a green slot to email me that time. UK time, but I’m flexible.</div></aside>
     <section class="cal-main"><div class="cal-head"><h4 id="calTitle"></h4><div class="tb-tools"><button class="tbtn" id="calPrev" aria-label="Previous week">‹</button><button class="tbtn on" id="calToday">Today</button><button class="tbtn" id="calNext" aria-label="Next week">›</button></div></div>
     <div class="cal-scroll"><div class="cg" id="cg"></div></div></section></div>`;
 }
@@ -1862,7 +1929,7 @@ const WINDOWS = {
   finder:  {title:'Work', app:'Finder', icon:()=>ICON.finder, w:820,h:520, html:finderHTML, mount:mountFinder,
             tools:`<button class="tbtn on" data-view-set="grid" aria-label="Icon view"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg></button><button class="tbtn" data-view-set="list" aria-label="List view"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="2" width="12" height="2" rx="1"/><rect x="1" y="6" width="12" height="2" rx="1"/><rect x="1" y="10" width="12" height="2" rx="1"/></svg></button>`},
   about:   {title:'about_me.txt', app:'Messages', icon:()=>ICON.about, w:620,h:660, html:aboutHTML, mount:mountAbout},
-  readme:  {title:'60-second summary', app:'TextEdit', icon:()=>ICON.readme, w:640,h:700, html:readmeHTML},
+  readme:  {title:'60-second summary', app:'TextEdit', icon:()=>ICON.readme, w:640,h:700, html:readmeHTML, mount:wireGreet},
   board:   {title:'how_i_work', app:'Board', icon:()=>ICON.board, w:940,h:560, html:boardHTML, mount:mountBoard},
   photos:  {title:'me.jpg', app:'Photos', icon:()=>ICON.jpg, w:760,h:560, html:photosHTML, mount:mountPhotos},
   music:   {title:'Spotify', app:'Spotify', icon:()=>ICON.spotify, w:980,h:640, html:musicHTML, mount:mountMusic},
@@ -2240,9 +2307,9 @@ const WALLS = [
   {id:'bliss', name:'Hills', tone:'dark', photo:1}, {id:'golden', name:'Golden hour', tone:'dark', photo:1}, {id:'night', name:'Night hills', tone:'dark', photo:1},
   {id:'mist', name:'Mist', tone:'light', photo:1}, {id:'meadow', name:'Meadow', tone:'dark', photo:1},
   {id:'dusk', name:'Dusk', tone:'dark', photo:1}, {id:'sunset', name:'Sunset', tone:'light', photo:1},
-  {id:'canvas', name:'Canvas', tone:'light', photo:1, story:'Where every project starts'}, {id:'swatch', name:'Swatches', tone:'light', photo:1, story:'A palette in progress', busy:1},
-  {id:'type', name:'Specimen', tone:'light', photo:1, story:'Type is half the interface', busy:1}, {id:'bauhaus', name:'Bauhaus', tone:'light', photo:1, story:'Form follows function', busy:1},
-  {id:'blueprint', name:'Blueprint', tone:'dark', photo:1, story:'Every screen starts as a sketch', busy:1},
+  {id:'canvas', name:'Canvas', tone:'light', photo:1, story:'Where every project starts'}, {id:'swatch', name:'Swatches', tone:'light', photo:1, story:'A palette in progress'},
+  {id:'type', name:'Specimen', tone:'light', photo:1, story:'Type is half the interface'}, {id:'bauhaus', name:'Bauhaus', tone:'light', photo:1, story:'Form follows function'},
+  {id:'blueprint', name:'Blueprint', tone:'dark', photo:1, story:'Every screen starts as a sketch'},
   {id:'custom', name:'Your photo', tone:store('bg-custom-tone')||'dark', photo:1, hidden:true},
 ];
 function setWall(id){ const w=WALLS.find(x=>x.id===id)||WALLS[0]; id=w.id; const r=document.documentElement; r.dataset.bg=id; r.dataset.tone=w.tone; r.toggleAttribute('data-photo',!!w.photo); r.toggleAttribute('data-busy',!!w.busy); store('wallpaper',id); $$('#wpGrid button').forEach(b=>b.classList.toggle('on',b.dataset.wall===id)); }
