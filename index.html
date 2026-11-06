@@ -504,6 +504,7 @@ svg{display:block}
 .rlink b{display:block;font-size:14px}
 .rlink small{color:var(--dim);font-size:12.5px}
 .rlink .num{margin-left:auto;font:400 26px/1 "Host Grotesk",sans-serif;color:var(--pink);white-space:nowrap;display:flex;align-items:baseline;gap:6px}
+.rlink .go{margin-left:auto;font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap}
 .rlink .num small{font:500 13px Inter,sans-serif;color:var(--ink-2)}
 .racts{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 
@@ -1557,8 +1558,8 @@ function readmeHTML(){
       <div class="rcard"><h6>I’m great at</h6><p>Making complex problems simple. I turn research into clear flows, prototype quickly and hand off cleanly to engineering.</p></div>
       <div class="rcard"><h6>Tools</h6>${toolsHTML()}</div>
     </div>
-    <h6 class="rhead">Selected work</h6>
-    <div class="rlist">${PROJECTS.slice(0,2).map(p=>`<button class="rlink" data-open="case:${p.id}">${projIcon(p)}<div><b>${p.short}</b><small>${p.tag}</small></div><span class="num">${p.results[0][0]} <small>${p.results[0][1]}</small></span></button>`).join('')}</div>
+    <h6 class="rhead">Selected works</h6>
+    <div class="rlist">${PROJECTS.map(p=>`<button class="rlink" data-open="case:${p.id}">${projIcon(p)}<div><b>${p.short}</b><small>${p.tag}</small></div>${p.url?`<span class="go">${p.id==='wdyt'?'App Store':'Website'} ↗</span>`:`<span class="num">${p.results[0][0]} <small>${p.results[0][1]}</small></span>`}</button>`).join('')}</div>
     <div class="racts">
       <button class="pill dark" data-open="resume">Résumé</button>
       <a class="pill ghost" href="mailto:${ME.email}">Email me</a>
@@ -2096,7 +2097,7 @@ document.addEventListener('keydown',e=>{
    ========================================================= */
 const DESK = [
   {id:'resume', label:'résumé.pdf', icon:ICON.pdf, pos:{right:'2.2%',top:'21%'}},
-  {id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'53%'}},
+  ...(ON_MAC?[{id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'53%'}}]:[]),
   {id:'case:timeline', label:'Timeline — social', icon:folderSVG(PROJECTS[0].color), pos:{left:'4%',top:'7%'}},
   {id:'case:groupify', label:'Groupify — creators', icon:folderSVG(PROJECTS[1].color), pos:{left:'4%',top:'26%'}},
   {id:'case:cora', label:'Cora — website', icon:ICON.web, pos:{left:'4%',top:'45%'}},
@@ -2136,7 +2137,7 @@ const DESK = [
 const DOCK = [
   {id:'finder', label:'Work', icon:()=>ICON.finder},
   {id:'about', label:'About me', icon:()=>ICON.about},
-  {id:'board', label:'How I work', icon:()=>ICON.board, hide:true},
+  ...(ON_MAC?[{id:'board', label:'How I work', icon:()=>ICON.board, hide:true}]:[]),
   {id:'calendar', label:'Book a chat', icon:()=>ICON.calendar},
   ...(QUOTES.length?[{id:'notes', label:'Kind words', icon:()=>ICON.notes}]:[]),
   {id:'resume', label:'Résumé', icon:()=>ICON.resume, hide:true},
@@ -2230,7 +2231,7 @@ const SPOT = [
   {t:'About me', s:'about_me.txt', k:'about me bio who', i:ICON.about, a:'about'},
   {t:'Spotify', s:'On Repeat playlist', k:'music spotify beyonce song playlist', i:ICON.spotify, a:'music'},
   {t:'Settings', s:'Wallpaper, appearance, playground', k:'settings preferences wallpaper background theme dark dock cursor grid', i:ICON.prefs, a:'prefs'},
-  {t:'How I work', s:'process', k:'process how work method board', i:ICON.board, a:'board'},
+  ...(ON_MAC?[{t:'How I work', s:'process', k:'process how work method board', i:ICON.board, a:'board'}]:[]),
   {t:'Book an intro chat', s:'Calendar', k:'calendar book chat call meet hire interview', i:ICON.calendar, a:'calendar'},
   ...(QUOTES.length?[{t:'Kind words', s:'Testimonials', k:'testimonials notes kind words references', i:ICON.notes, a:'notes'}]:[]),
   {t:'Résumé', s:'résumé.pdf', k:'resume cv experience pdf hire', i:ICON.pdf, a:'resume'},
@@ -2323,7 +2324,7 @@ const WALLS = [
   {id:'blueprint', name:'Blueprint', tone:'dark', photo:1, story:'Every screen starts as a sketch'},
   {id:'custom', name:'Your photo', tone:store('bg-custom-tone')||'dark', photo:1, hidden:true},
 ];
-function setWall(id){ const w=WALLS.find(x=>x.id===id)||WALLS[0]; id=w.id; const r=document.documentElement; r.dataset.bg=id; r.dataset.tone=w.tone; r.toggleAttribute('data-photo',!!w.photo); r.toggleAttribute('data-busy',!!w.busy); store('wallpaper',id); $$('#wpGrid button').forEach(b=>b.classList.toggle('on',b.dataset.wall===id)); }
+function setWall(id,keep=true){ const w=WALLS.find(x=>x.id===id)||WALLS[0]; id=w.id; const r=document.documentElement; r.dataset.bg=id; r.dataset.tone=w.tone; r.toggleAttribute('data-photo',!!w.photo); r.toggleAttribute('data-busy',!!w.busy); if(keep) store('wall',id); $$('#wpGrid button').forEach(b=>b.classList.toggle('on',b.dataset.wall===id)); }
 $('#wpGrid').innerHTML=WALLS.filter(w=>!w.hidden).map(w=>`<button data-wall="${w.id}"><i data-bg-swatch="${w.id}"></i>${w.name}</button>`).join('');
 // swatches reuse the real wallpaper CSS by borrowing a .wall's computed background
 $$('#wpGrid i').forEach(i=>{ const probe=document.createElement('div'); probe.className='wall'; probe.style.cssText='position:absolute;visibility:hidden';
@@ -2333,7 +2334,7 @@ $$('#wpGrid button').forEach(b=>b.onclick=()=>setWall(b.dataset.wall));
 function toggleWallPicker(force){ const p=$('#wp'), on=force??!p.classList.contains('open'); p.classList.toggle('open',on); $('#wallBtn').classList.toggle('open',on); }
 $('#wallBtn').addEventListener('click',e=>{ e.stopPropagation(); closeMenu(); toggleWallPicker(); });
 addEventListener('click',e=>{ if(!e.target.closest('#wp,#wallBtn')) toggleWallPicker(false); });
-{ const c=store('bg-custom'); if(c) document.documentElement.style.setProperty('--custom-wall',`url("${c}")`); setWall(store('wallpaper')==='custom'&&!c?'bliss':store('wallpaper')||'bliss'); }
+{ const c=store('bg-custom'); if(c) document.documentElement.style.setProperty('--custom-wall',`url("${c}")`); setWall(store('wall')==='custom'&&!c?'swatch':store('wall')||'swatch',false); }
 applyVP();
 
 /* =========================================================
@@ -2499,7 +2500,7 @@ function playFromSet(){ sstore('settings-after','1'); sstore('unlocked',''); con
 $('#stX').onclick=()=>toggleSet(false);
 $('#stCopy').onclick=async()=>{ const txt='Rose portfolio settings:\n'+JSON.stringify({...SET,background:document.documentElement.dataset.bg,theme:document.documentElement.dataset.theme},null,2);
   try{ await navigator.clipboard.writeText(txt); toast('Settings copied — paste them to Claude'); }catch(e){ prompt('Copy these settings:',txt); } };
-$('#stReset').onclick=()=>{ if(!confirm('Reset all designer settings?')) return; try{ localStorage.removeItem('rose-settings'); localStorage.removeItem('wallpaper'); }catch(e){} reopenAfterReload(); location.reload(); };
+$('#stReset').onclick=()=>{ if(!confirm('Reset all designer settings?')) return; try{ localStorage.removeItem('rose-settings'); localStorage.removeItem('wall'); }catch(e){} reopenAfterReload(); location.reload(); };
 const LOCAL=ON_MAC;
 if(!LOCAL) $('#setBtn').style.display='none';
 function toggleSet(force){ if(!LOCAL) return; const on=force??!stEl.classList.contains('open'); if(on) renderSet(); stEl.classList.toggle('open',on); $('#setBtn').classList.toggle('open',on); }
