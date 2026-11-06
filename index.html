@@ -1765,10 +1765,16 @@ function mountMusic(w){
   const vin=$('.vinyl',w), disc=$('.disc',vin); let ang=0, last=performance.now(), drag=null, ac=null, sc=null;
   const spin=now=>{ if(!w.isConnected) return; const dt=now-last; last=now; if(!drag && playing) ang+=dt*.2; disc.style.transform=`rotate(${ang}deg)`; requestAnimationFrame(spin); };
   requestAnimationFrame(spin);
-  const scratchOn=()=>{ try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); ac.resume();
-    const len=ac.sampleRate*2, buf=ac.createBuffer(1,len,ac.sampleRate), d=buf.getChannelData(0);
-    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*.6+Math.sin(i/ac.sampleRate*2*Math.PI*110*(1+Math.sin(i/900)*.3))*.5;
-    const n=ac.createBufferSource(); n.buffer=buf; n.loop=true; const f=ac.createBiquadFilter(); f.type='bandpass'; f.Q.value=2.5; const g=ac.createGain(); g.gain.value=0;
+  // iPhones: Web Audio must be unlocked by a tap, and follows the silent switch unless the page asks for "playback"
+  let noise=null;
+  const unlock=()=>{ try{ if(navigator.audioSession) navigator.audioSession.type='playback'; ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    if(ac.state!=='running') ac.resume();
+    if(!noise){ const len=ac.sampleRate*2; noise=ac.createBuffer(1,len,ac.sampleRate); const d=noise.getChannelData(0);
+      for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*.6+Math.sin(i/ac.sampleRate*2*Math.PI*110*(1+Math.sin(i/900)*.3))*.5;
+      const s=ac.createBufferSource(); s.buffer=ac.createBuffer(1,1,ac.sampleRate); s.connect(ac.destination); s.start(); } }catch(e){} };
+  w.addEventListener('touchend',unlock,{passive:true}); w.addEventListener('click',unlock);
+  const scratchOn=()=>{ try{ unlock();
+    const n=ac.createBufferSource(); n.buffer=noise; n.loop=true; const f=ac.createBiquadFilter(); f.type='bandpass'; f.Q.value=2.5; const g=ac.createGain(); g.gain.value=0;
     n.connect(f).connect(g).connect(ac.destination); n.start(); sc={n,f,g}; }catch(e){ sc=null; } };
   const scratchOff=()=>{ if(!sc) return; const {n,g}=sc; g.gain.setTargetAtTime(0,ac.currentTime,.03); setTimeout(()=>n.stop(),200); sc=null; };
   const note=()=>{ if(reduce) return; const r=vin.getBoundingClientRect(), e=document.createElement('span'); e.className='sp-note-fx'; e.textContent=['♪','♫','♬','♩'][Math.floor(Math.random()*4)];
