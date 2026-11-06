@@ -124,6 +124,7 @@ svg{display:block}
 .dicon .ico{width:64px;height:58px;display:grid;place-items:center;filter:drop-shadow(0 6px 10px rgba(60,30,60,.18));transition:transform .25s var(--ease-out)}
 .dicon:hover .ico{transform:translateY(-3px) rotate(-2deg)}
 .dicon .ico svg{width:100%;height:100%}
+.dicon .lbl-s{display:none}
 .dicon .lbl{font-size:12px;font-weight:500;line-height:1.25;text-align:center;padding:2px 6px;border-radius:5px;max-width:100%;text-shadow:0 1px 6px var(--wall-a)}
 .dicon.sel .ico{background:rgba(127,127,127,.15);border-radius:8px}
 .dicon.sel .lbl{background:var(--sel);color:#fff;text-shadow:none}
@@ -829,21 +830,12 @@ svg{display:block}
   .sticky-note{position:static;margin:28px auto 0;transform:rotate(-2deg)}
   .doodle{display:none}
   .dock-wrap{bottom:calc(10px + env(safe-area-inset-bottom))}
-  .dock{gap:6px;height:auto;padding:8px 10px;border-radius:24px;width:calc(100vw - 24px);max-width:calc(100vw - 24px);justify-content:space-between}
-  .dk{width:auto!important;height:auto!important;flex:1 1 0;min-width:0;max-width:54px;aspect-ratio:1}
+  .dock{gap:8px;height:auto;padding:8px 10px;border-radius:24px;width:auto;max-width:calc(100vw - 24px);justify-content:center}
+  .dk{width:auto!important;height:auto!important;flex:0 1 54px;min-width:0;aspect-ratio:1}
   .hero-name{font-size:22px}
   .hero-lead{margin-top:12px;font-size:clamp(19px,5.6vw,24px);line-height:1.28}
   .hero-more{margin-top:12px;font-size:14px;line-height:1.55}
   .hero .ctas{margin-top:18px}
-  .icons{margin-top:28px!important;gap:14px 4px!important}
-  .icons{align-items:start;display:flex!important;flex-wrap:wrap;justify-content:center;gap:16px 0!important}
-  .icons .dicon{flex:0 0 33.333%;width:33.333%}
-  .dicon[data-open="case:timeline"]{order:1} .dicon[data-open="case:groupify"]{order:2} .dicon[data-open="case:cora"]{order:3} .dicon[data-open="case:wdyt"]{order:4}
-  .dicon[data-open="resume"]{order:5} .dicon[data-open="board"]{order:6}
-  .dicon{justify-content:flex-start}
-  .dicon .ico{width:52px!important;height:52px!important;display:flex!important;align-items:center;justify-content:center}
-  .dicon .ico svg{width:52px!important;height:52px!important;display:block}
-  .dicon .lbl{font-size:10.5px!important}
   .dk.hide-sm,.dsep{display:none}
   .dk .tip{display:none}
   .wins{position:fixed;z-index:1000}
@@ -1037,13 +1029,26 @@ svg{display:block}
 .st-foot button{flex:1;height:32px;border-radius:8px;background:#f1f1ef;font-weight:500}
 .st-foot button:hover{background:#e7e7e4}
 .st-note{color:#8a8a8a;font-size:11.5px;margin:6px 0 2px}
+/* phones & narrow screens: hero stays a comfortable width, work sits in one calm frosted panel with short names */
+@media (max-width:760px){
+  .hero{max-width:560px;margin:0 auto}
+  .icons{display:flex!important;flex-wrap:wrap;justify-content:center;gap:18px 0!important;max-width:560px;margin:30px auto 0!important;padding:18px 6px 16px;border-radius:26px;background:rgba(255,255,255,.42);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:0 0 0 .5px rgba(0,0,0,.06),0 18px 40px -24px rgba(0,0,0,.3)}
+  [data-tone="dark"] .icons{background:rgba(10,20,40,.32);box-shadow:0 0 0 .5px rgba(255,255,255,.12)}
+  .dicon{position:static!important;flex:0 0 33.333%;width:33.333%!important;padding:0!important;gap:6px;justify-content:flex-start}
+  .dicon .ico{width:56px!important;height:56px!important;display:flex!important;align-items:center;justify-content:center}
+  .dicon .ico svg{width:56px!important;height:56px!important;display:block}
+  .dicon .lbl{display:none!important}
+  .dicon .lbl-s{display:block;font-size:12px;font-weight:500;text-align:center;color:#0a0a0a}
+  [data-tone="dark"] .dicon .lbl-s{color:#fff}
+  .dicon[data-open="case:timeline"]{order:1} .dicon[data-open="case:groupify"]{order:2} .dicon[data-open="case:cora"]{order:3} .dicon[data-open="link:linkedin"]{order:4} .dicon[data-open="case:wdyt"]{order:5} .dicon[data-open="resume"]{order:6} .dicon[data-open="board"]{order:7}
+}
 </style>
 </head>
 <body>
 
 <!-- ================= INTRO: the portfolio gets drawn as a frame ================= -->
 <div class="fx" id="fx" hidden aria-hidden="true">
-  <script>try{ var S={}; try{ S=JSON.parse(localStorage.getItem('rose-settings'))||{}; }catch(e){} var q=location.search, f=/[?&]intro/.test(q); if((f || ((S.startup||'intro')==='intro' && (!sessionStorage.getItem('unlocked') || S.everyLoad))) && !/[?&]skip/.test(q) && (f || !matchMedia('(prefers-reduced-motion: reduce)').matches)){ document.documentElement.classList.add('fx-on'); document.currentScript.parentNode.hidden=false; } }catch(e){}</script>
+  <script>try{ var S={}; try{ S=JSON.parse(localStorage.getItem('rose-settings'))||{}; }catch(e){} var q=location.search, f=/[?&]intro/.test(q); if((f || ((S.startup||'intro')==='intro')) && !/[?&]skip/.test(q) && (f || !matchMedia('(prefers-reduced-motion: reduce)').matches)){ document.documentElement.classList.add('fx-on'); document.currentScript.parentNode.hidden=false; } }catch(e){}</script>
   <div class="fx-canvas"></div>
   <div class="fx-frame" id="fxFrame"></div>
   <div class="fx-ui">
@@ -1951,7 +1956,7 @@ function mountMail(w){
   setTimeout(()=>{ ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); },350);
 }
 
-const TRASHED = [['timeline_feed_v1.fig','#7ab8f5'],['timeline_onboarding_v1.fig','#7ab8f5'],['groupify_checkout_v1.fig','#8d74f2'],['groupify_sales_page_v1.fig','#8d74f2'],['cora_setup_flow_v1.fig','#e2ab12'],['wdyt_shop_v1.fig','#2c8a62'],['dark_patterns.fig','#1c1a1f'],['lorem_ipsum_FINAL.doc','#3f8ff0']];
+const TRASHED = [['timeline_feed_v3.fig','#7ab8f5'],['timeline_onboarding_v1.fig','#7ab8f5'],['groupify_checkout_v5.fig','#8d74f2'],['groupify_sales_page_v2.fig','#8d74f2'],['cora_setup_flow_v4.fig','#e2ab12'],['wdyt_shop_v1.fig','#2c8a62'],['dark_patterns.fig','#1c1a1f']];
 function trashHTML(){
   return `<div style="display:flex;flex-direction:column;height:100%"><div class="trash" style="flex:1;overflow:auto">${TRASHED.map(([n,c])=>`<div class="fitem"><div class="ico">${fileSVG(n.split('.').pop().toUpperCase().slice(0,4),c)}</div><span style="color:var(--ink);font-size:12px;word-break:break-word">${n}</span></div>`).join('')}</div>
   <div class="trash-foot"><span>First versions that didn’t make the cut.</span><button class="tbtn" data-empty>Empty Trash</button></div></div>`;
@@ -1994,7 +1999,7 @@ const open = new Map(); // id -> element
 function bounds(){ const dockH=isMobile()?0:96; return {x:8,y:parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))+8,w:innerWidth-16,h:innerHeight-dockH-parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))-16}; }
 
 function openWin(id, origin, opts){
-  const link=id.startsWith('case:') && PROJECTS.find(p=>p.id===id.slice(5))?.url;
+  const link=id==='link:linkedin' ? ME.linkedin : id.startsWith('case:') && PROJECTS.find(p=>p.id===id.slice(5))?.url;
   if(link){ closeMenu(); window.open(link,'_blank','noopener'); return; }
   const d=def(id); if(!d) return;
   closeMenu();
@@ -2119,12 +2124,13 @@ document.addEventListener('keydown',e=>{
    DESKTOP ICONS
    ========================================================= */
 const DESK = [
-  {id:'resume', label:'résumé.pdf', icon:ICON.pdf, pos:{right:'2.2%',top:'21%'}},
-  ...(ON_MAC?[{id:'board', label:'how_i_work', icon:ICON.board, pos:{right:'2.2%',top:'40%'}}]:[]),
-  {id:'case:timeline', label:'Timeline — social', icon:folderSVG(PROJECTS[0].color), pos:{left:'4%',top:'7%'}},
-  {id:'case:groupify', label:'Groupify — creators', icon:folderSVG(PROJECTS[1].color), pos:{left:'4%',top:'26%'}},
-  {id:'case:cora', label:'Cora — website', icon:ICON.web, pos:{left:'4%',top:'45%'}},
-  {id:'case:wdyt', label:'Wdyt — iOS app', icon:ICON.wdyt, pos:{left:'4%',top:'64%'}},
+  {id:'case:timeline', label:'Timeline — social', short:'Timeline', icon:folderSVG(PROJECTS[0].color), pos:{left:'4%',top:'8%'}},
+  {id:'case:groupify', label:'Groupify — creators', short:'Groupify', icon:folderSVG(PROJECTS[1].color), pos:{left:'4%',top:'28%'}},
+  {id:'link:linkedin', label:'LinkedIn', short:'LinkedIn', icon:ICON.linkedin, pos:{left:'4%',top:'48%'}},
+  {id:'case:cora', label:'Cora — website', short:'Cora', icon:ICON.web, pos:{right:'2.2%',top:'8%'}},
+  {id:'case:wdyt', label:'Wdyt — iOS app', short:'Wdyt', icon:ICON.wdyt, pos:{right:'2.2%',top:'28%'}},
+  {id:'resume', label:'résumé.pdf', short:'Résumé', icon:ICON.pdf, pos:{right:'2.2%',top:'48%'}},
+  ...(ON_MAC?[{id:'board', label:'how_i_work', short:'How I work', icon:ICON.board, pos:{right:'2.2%',top:'68%'}}]:[]),
   ...(QUOTES.length?[{id:'notes', label:'kind words', icon:ICON.notes, pos:{right:'11%',top:'8%'}}]:[]),
 ];
 (function buildIcons(){
@@ -2133,7 +2139,7 @@ const DESK = [
     const b=document.createElement('button');
     b.className='dicon'; b.dataset.open=it.id; b.setAttribute('aria-label','Open '+it.label);
     Object.entries(it.pos).forEach(([k,v])=>b.style[k]=v);
-    b.innerHTML=`<span class="ico">${it.icon}</span><span class="lbl">${it.label}</span>`;
+    b.innerHTML=`<span class="ico">${it.icon}</span><span class="lbl">${it.label}</span><span class="lbl-s">${it.short||it.label}</span>`;
     box.appendChild(b);
     // drag-or-click
     b.addEventListener('pointerdown',e=>{
@@ -2470,7 +2476,6 @@ function stHTML(){
   <h5>Intro</h5>
   <div class="st-field"><label>When the site opens</label><div class="st-seg" data-seg="startup">
     ${[['intro','Figma intro'],['lock','Lock screen'],['none','Straight in']].map(([v,l])=>`<button data-v="${v}" class="${SET.startup===v?'on':''}">${l}</button>`).join('')}</div></div>
-  ${sw('everyLoad','Play on every refresh')}
   <div class="st-row"><span>Speed</span><input type="range" min="0.5" max="2" step="0.25" value="${SET.speed}" data-range="speed"><output>${SET.speed}×</output></div>
   ${sw('panels','Show Figma side panels')}
   ${col('cursor','Cursor tag colour')}
@@ -2538,7 +2543,7 @@ if(/[?&]settings/.test(location.search) || sstore('settings-open')){ sstore('set
 
 (function boot(){
   const q=location.search, forced=/[?&]intro/.test(q);
-  const fresh=!sstore('unlocked') || forced || SET.everyLoad;
+  const fresh=true; // the intro plays on every load
   const hideLock=()=>{ $('#lock').hidden=true; $('#lock').classList.add('gone'); unlock.did=true; };
   if(/[?&]skip/.test(q) || !fresh || (reduce&&!forced)){ hideLock(); if(reduce&&!sstore('unlocked')) welcome(); return; }
   if(forced || SET.startup==='intro') return runIntro();
