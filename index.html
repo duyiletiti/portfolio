@@ -144,15 +144,15 @@ svg{display:block}
 /* Spotify-style player */
 .sp{height:100%;display:grid;grid-template-rows:56px 1fr 72px;gap:8px;padding:0 8px;background:#000;color:#fff;font:14px/1.4 "Host Grotesk",Inter,system-ui,sans-serif}
 .sp button{color:inherit}
-.sp-top{display:flex;align-items:center;gap:8px;padding:0 6px}
+.sp-top{display:grid;grid-template-columns:1fr minmax(0,440px) 1fr;align-items:center;gap:8px;padding:0 6px}
 .sp-logo{width:32px;height:32px;flex:none;border-radius:50%;overflow:hidden}
 .sp-logo svg{width:100%;height:100%}
 .sp-circ{width:44px;height:44px;border-radius:50%;background:#1f1f1f;display:grid;place-items:center;margin-left:auto;flex:none}
-.sp-search{flex:0 1 420px;height:44px;border-radius:999px;background:#1f1f1f;display:flex;align-items:center;gap:10px;padding:0 14px;color:#b3b3b3}
+.sp-search{width:100%;height:44px;border-radius:999px;background:#1f1f1f;display:flex;align-items:center;gap:10px;padding:0 14px;color:#b3b3b3}
 .sp-search:focus-within{box-shadow:0 0 0 2px #fff}
 .sp-search input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font-size:14px}
 .sp-search input::placeholder{color:#b3b3b3}
-.sp-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.sp-r{grid-column:3;justify-self:end;display:flex;align-items:center;gap:12px}
 .sp-me{width:32px;height:32px;border-radius:50%;background:#1ed760;color:#000;display:grid;place-items:center;font-weight:700;border:4px solid #1f1f1f;box-sizing:content-box}
 .sp-ic{display:grid;place-items:center;color:#b3b3b3;text-decoration:none;font-weight:700;letter-spacing:1px}
 .sp-ic:hover,.sp-ic.on{color:#fff}
@@ -486,6 +486,8 @@ svg{display:block}
 .ab .racts{margin-top:4px}
 .readme{padding:28px 32px 36px;max-width:720px;margin:0 auto}
 .readme .ab-head{margin-bottom:4px}
+.readme .ab-head h1{font:400 34px/1.08 "Host Grotesk",sans-serif;white-space:nowrap}
+@media (max-width:760px){ .readme .ab-head h1,.ab-head h1{white-space:normal;font-size:28px} }
 .readme h1{font:400 38px/1.05 "Host Grotesk",sans-serif}
 .readme h1 em{color:var(--dim);font-style:normal}
 .readme .tl{margin-top:10px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
@@ -812,7 +814,10 @@ svg{display:block}
   .hero-more{margin-top:12px;font-size:14px;line-height:1.55}
   .hero .ctas{margin-top:18px}
   .icons{margin-top:28px!important;gap:14px 4px!important}
-  .dicon .ico{width:50px!important;height:46px!important}
+  .icons{align-items:start}
+  .dicon{justify-content:flex-start}
+  .dicon .ico{width:52px!important;height:52px!important;display:flex!important;align-items:center;justify-content:center}
+  .dicon .ico svg{width:52px!important;height:52px!important;display:block}
   .dicon .lbl{font-size:10.5px!important}
   .dk.hide-sm,.dsep{display:none}
   .dk .tip{display:none}
@@ -1649,14 +1654,14 @@ const ART = {
 };
 const artSVG = k => `<svg viewBox="0 0 300 300" aria-hidden="true"><defs>${GRAIN}</defs>${ART[k].s}<rect width="300" height="300" filter="url(#grn)"/></svg>`;
 const TRACKS = [
-  {t:'CUFF IT', a:'Beyoncé', al:'RENAISSANCE', d:'3:45', k:'cuff'},
-  {t:'Love On Top', a:'Beyoncé', al:'4', d:'4:27', k:'love'},
-  {t:'ALIEN SUPERSTAR', a:'Beyoncé', al:'RENAISSANCE', d:'3:35', k:'alien'},
-  {t:'Halo', a:'Beyoncé', al:'I AM... SASHA FIERCE', d:'4:21', k:'halo'},
-  {t:'TEXAS HOLD ’EM', a:'Beyoncé', al:'COWBOY CARTER', d:'3:55', k:'texas'},
-  {t:'Crazy In Love', a:'Beyoncé, JAY-Z', al:'Dangerously In Love', d:'3:56', k:'crazy'},
-  {t:'BREAK MY SOUL', a:'Beyoncé', al:'RENAISSANCE', d:'4:38', k:'soul'},
-  {t:'Formation', a:'Beyoncé', al:'Lemonade', d:'3:26', k:'formation'},
+  {t:'CUFF IT', a:'Beyoncé', al:'RENAISSANCE', d:'3:45', k:'cuff', art:'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/fe/ba/43/feba43be-99e8-ad8c-9fad-1bfdea7a4e98/196589344267.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6a/7b/37/6a7b37bc-435f-efab-6543-3c3b51226bee/mzaf_9803062496289730536.plus.aac.p.m4a'},
+  {t:'Love On Top', a:'Beyoncé', al:'4', d:'4:27', k:'love', art:'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c9/6b/3f/c96b3ff3-9cf6-4ce6-05aa-9f11474bd569/886443938373.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fe/0d/43/fe0d4311-3027-745d-759b-aec3354a54e7/mzaf_10947966188805060685.plus.aac.p.m4a'},
+  {t:'ALIEN SUPERSTAR', a:'Beyoncé', al:'RENAISSANCE', d:'3:35', k:'alien', art:'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/fe/ba/43/feba43be-99e8-ad8c-9fad-1bfdea7a4e98/196589344267.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2d/ff/e1/2dffe142-728c-ccb3-e8bb-148a663f293e/mzaf_2296987689256714156.plus.aac.p.m4a'},
+  {t:'Halo', a:'Beyoncé', al:'I AM... SASHA FIERCE', d:'4:21', k:'halo', art:'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/52/f9/76/52f976b0-016e-a3bf-1897-f69fb5d002d7/mzi.csyboqno.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fb/4a/62/fb4a622f-727e-21f2-5d0b-078205d3b16a/mzaf_13032644911525500388.plus.aac.p.m4a'},
+  {t:'TEXAS HOLD ’EM', a:'Beyoncé', al:'COWBOY CARTER', d:'3:55', k:'texas', art:'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ab/17/80/ab178005-ebf8-f22e-06ac-ffa1fc7f819a/196871850438.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e7/fe/81/e7fe812a-e95d-8971-9885-0c317671ce63/mzaf_13578365911245876234.plus.aac.p.m4a'},
+  {t:'Crazy In Love', a:'Beyoncé, JAY-Z', al:'Dangerously In Love', d:'3:56', k:'crazy', art:'https://is1-ssl.mzstatic.com/image/thumb/Music/03/c5/d4/mzi.ldvrmhxt.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7a/7f/b3/7a7fb397-c707-f7a6-93be-1db3cd1c7fcb/mzaf_10719026518601275807.plus.aac.p.m4a'},
+  {t:'BREAK MY SOUL', a:'Beyoncé', al:'RENAISSANCE', d:'4:38', k:'soul', art:'https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/05/05/f3/0505f338-9873-feb4-af7f-27a470405e5f/196589246974.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fa/60/b4/fa60b48b-5906-0a64-6853-92b5c648c953/mzaf_1241862116086704234.plus.aac.p.m4a'},
+  {t:'Formation', a:'Beyoncé', al:'Lemonade', d:'3:26', k:'formation', art:'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3b/3c/65/3b3c6590-55e0-9a55-2e1d-96af51343117/886447691168.jpg/300x300bb.jpg', pre:'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/05/cf/48/05cf4891-bcca-cc19-4b8e-57186a7844f7/mzaf_13022177750857955914.plus.aac.p.m4a'},
 ];
 const SPI = { // small line icons
   home:'<path d="M3 10.5L12 3l9 7.5V21h-6v-6H9v6H3z"/>', search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>', bell:'<path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 21h4"/>',
@@ -1679,7 +1684,7 @@ function musicHTML(){
           <ol class="sp-list">${TRACKS.map((t,i)=>`<li><button data-tr="${i}"><span class="n"><i>${i+1}</i><em>${PLAY}</em></span><span class="tt"><span class="th" data-art="${i}">${artSVG(t.k)}</span><span><b>${t.t}</b><small>${t.a}</small></span></span><span class="al">${t.al}</span><span class="du">${t.d}</span></button></li>`).join('')}</ol>
           <p class="sp-note">30-second previews · <a href="https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m" target="_blank" rel="noopener">listen on Spotify</a></p></div>
       </main></div>
-    <footer class="sp-bar"><div class="sp-now"><span class="th">${artSVG(TRACKS[0].k)}</span><span><b>${TRACKS[0].t}</b><small>${TRACKS[0].a}</small></span><button class="sp-ic" aria-label="Save">${spi('plus')}</button></div>
+    <footer class="sp-bar"><div class="sp-now"><span class="th">${artSVG(TRACKS[0].k)}</span><span><b>${TRACKS[0].t}</b><small>${TRACKS[0].a}</small></span></div>
       <div class="sp-ctl"><div><button class="sp-ic" data-sp="shuffle" aria-label="Shuffle">${spi('shuffle')}</button><button class="sp-ic" data-sp="prev" aria-label="Previous">${spi('prev')}</button><button class="sp-pp" data-sp="toggle" aria-label="Play">${PLAY}</button><button class="sp-ic" data-sp="next" aria-label="Next">${spi('next')}</button><button class="sp-ic" data-sp="repeat" aria-label="Repeat">${spi('rep')}</button></div>
         <div class="sp-prog"><span class="cur">0:00</span><div class="track"><i></i></div><span class="tot">0:30</span></div></div>
       <div class="sp-vol"><button class="sp-ic" aria-label="Queue">${spi('queue')}</button><button class="sp-ic" aria-label="Volume">${spi('vol')}</button><input type="range" min="0" max="1" step=".01" value=".7" aria-label="Volume"></div></footer>
@@ -1694,22 +1699,25 @@ function mountMusic(w){
     box.innerHTML=pics.map(a=>`<img alt="" src="${a.artworkUrl100.replace('100x100bb','600x600bb')}">`).join('');
     Promise.all([...box.querySelectorAll('img')].map(i=>i.decode().catch(()=>{}))).then(()=>box.classList.add('on'));
   }).catch(()=>{});
-  const audio=new Audio(); audio.volume=.7; let cur=0, playing=false, shuffle=false, urls={}, arts={};
+  const audio=new Audio(); audio.volume=.7; audio.preload='none'; let cur=0, playing=false, shuffle=false, urls={}, arts={};
+  TRACKS.forEach(t=>{ if(t.pre) urls[t.k]=t.pre; if(t.art) arts[t.k]=t.art; });
   const artFor=t=>arts[t.k]?`<img alt="" src="${arts[t.k]}">`:artSVG(t.k);
   // real song artwork + preview link for every track, from Apple's catalogue
   async function look(t){ if(t.k in urls) return;
     const r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent('Beyonce '+t.t)}&media=music&entity=song&limit=5`).then(r=>r.json()).catch(()=>({}));
     const hit=(r.results||[]).find(x=>/beyonc/i.test(x.artistName)&&x.previewUrl)||{};
     urls[t.k]=hit.previewUrl; if(hit.artworkUrl100) arts[t.k]=hit.artworkUrl100.replace('100x100bb','300x300bb'); }
-  TRACKS.forEach((t,i)=>look(t).then(()=>{ if(!arts[t.k]||!w.isConnected) return; $(`[data-art="${i}"]`,w).innerHTML=artFor(t); if(i===cur) ui(); }));
+  TRACKS.forEach((t,i)=>{ $(`[data-art="${i}"]`,w).innerHTML=artFor(t); });
   const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
   const ui=()=>{ const t=TRACKS[cur];
     $('.sp-now .th',w).innerHTML=artFor(t); $('.vinyl .lbl',w).innerHTML=artFor(t); w.classList.toggle('sp-on',playing); $('.sp-now b',w).textContent=t.t; $('.sp-now small',w).textContent=t.a;
     $$('[data-tr]',w).forEach((b,i)=>{ b.classList.toggle('on',i===cur); b.classList.toggle('playing',i===cur&&playing); });
     $$('[data-sp="toggle"]',w).forEach(b=>{ b.innerHTML=playing?PAUSE:PLAY; b.setAttribute('aria-label',playing?'Pause':'Play'); }); };
   async function src(t){ await look(t); return urls[t.k]; }
-  async function play(i){ cur=(i+TRACKS.length)%TRACKS.length; playing=true; ui();
-    try{ const u=await src(TRACKS[cur]); if(!u) throw 0; if(audio.src!==u) audio.src=u; await audio.play(); }catch(e){ playing=false; ui(); toast('Preview unavailable, try Spotify'); } }
+  const fail=()=>{ playing=false; ui(); toast('Preview unavailable, try Spotify'); };
+  function play(i){ cur=(i+TRACKS.length)%TRACKS.length; playing=true; ui(); const t=TRACKS[cur];
+    const go=u=>{ if(!u) return fail(); if(audio.src!==u) audio.src=u; const p=audio.play(); if(p) p.catch(e=>{ if(e.name!=='AbortError') fail(); }); };
+    if(urls[t.k]) go(urls[t.k]); else src(t).then(go,fail); }
   const toggle=()=>{ if(playing){ audio.pause(); playing=false; ui(); } else if(audio.src){ audio.play(); playing=true; ui(); } else play(cur); };
   audio.addEventListener('timeupdate',()=>{ if(!w.isConnected){ audio.pause(); return; } const d=audio.duration||30;
     $('.sp-prog i',w).style.width=(audio.currentTime/d*100)+'%'; $('.sp-prog .cur',w).textContent=fmt(audio.currentTime); $('.sp-prog .tot',w).textContent=fmt(d); });
