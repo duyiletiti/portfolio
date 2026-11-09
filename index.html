@@ -446,6 +446,100 @@ svg{display:block}
 .case-next b{font:400 26px/1.1 "Host Grotesk",sans-serif}
 .case-next .arr{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none;transition:transform .25s var(--ease-out)}
 .case-next:hover .arr{transform:translateX(4px)}
+/* short case study: a scrollable page, one idea per section */
+.cs{--c-bg:#fbfaf8;--c-top:#f1efea;--c-ink:#111;--c-2:#55524e;--c-dim:#8a8680;--c-card:#fff;--c-line:rgba(0,0,0,.08);background:var(--c-bg);color:var(--c-ink);min-height:100%}
+.cs.dark{--c-bg:#0b0b0b;--c-top:#0b0b0b;--c-ink:#f4f2ee;--c-2:#b9b5ae;--c-dim:#8a8680;--c-card:#171717;--c-line:rgba(255,255,255,.09)}
+.cs-in{max-width:760px;margin:0 auto;padding:0 40px}
+.cs-top{background:var(--c-top);padding:64px 0 44px}
+.cs h1{font:400 clamp(38px,5vw,56px)/1.02 "Host Grotesk",sans-serif;letter-spacing:-.02em}
+.cs-sub{margin-top:8px;font-size:15px;color:var(--c-dim)}
+.cs-meta{display:grid;grid-template-columns:1fr;gap:22px;margin-top:34px}
+.cs h3{font:500 19px/1.2 "Host Grotesk",sans-serif;margin-bottom:8px}
+.cs p{font-size:16px;line-height:1.7;color:var(--c-2);text-wrap:pretty}
+.cs-meta p{font-size:15px}
+.cs-deck{margin-top:30px;display:inline-flex;align-items:center;gap:12px;padding:11px 12px 11px 18px;border-radius:999px;background:var(--c-btn,var(--c-ink));color:var(--c-btn-ink,var(--c-bg));font:500 14px "Host Grotesk",sans-serif;transition:transform .2s var(--ease-out)}
+.cs-deck span{padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--c-bg) 18%,transparent);font-size:12.5px}
+.cs-deck:hover{transform:translateY(-1px)}
+.cs-hero{margin-top:40px}
+.cs-sec{margin-top:64px}
+.cs{container-type:inline-size}
+
+.cs h2{font:400 clamp(26px,3vw,32px)/1.15 "Host Grotesk",sans-serif;letter-spacing:-.01em;margin-bottom:14px}
+.cs-sec p + p{margin-top:12px}
+.cs.dark .cs-top{border-bottom:1px solid var(--c-line)}
+.cs[style*="--c-btn"]{--c-btn-ink:#fff}
+.cs-list{list-style:none;display:grid;gap:18px;margin-top:18px}
+.cs-list li{display:grid;grid-template-columns:1fr}
+.cs-list i{font:500 17px/1.45 "Host Grotesk",sans-serif;font-style:normal;color:var(--c-dim)}
+.cs-list li:has(> i){grid-template-columns:22px 1fr;gap:8px}
+.cs-list b{display:block;font:500 17px/1.45 "Host Grotesk",sans-serif;margin-bottom:2px}
+.cs-list p{font-size:16px;line-height:1.7}
+.cs-list + p{margin-top:22px}
+.cs-v{padding:0;display:grid;place-items:center}
+.cs-v video,.cs-v > img{display:block;width:100%;height:auto}
+.cs-v:has(> img){background:transparent}
+.cs-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.cs-chips span{padding:9px 16px;border-radius:999px;background:var(--c-card);box-shadow:inset 0 0 0 1px var(--c-line);font-size:14.5px}
+.cs-cards{display:grid;gap:18px;margin-top:18px}
+.cs-cards b{display:block;font:500 17px/1.45 "Host Grotesk",sans-serif;margin-bottom:2px}
+.cs-cards p{font-size:16px;line-height:1.7}
+.cs-figs{display:grid;gap:14px;margin-top:26px}
+.cs-fig{position:relative;margin:0 0 14px}
+.cs-frame{border-radius:18px;background:#141414;box-shadow:0 0 0 1px var(--c-line);overflow:hidden;padding:18px}
+.cs-frame:has(> .cs-crop){background:#121212}
+.cs-fig.shot .cs-crop{border-radius:12px}
+.cs-crop{--y:0;--w:calc(1 - var(--x));--ar:calc(16 * var(--w)) / calc(9 * var(--h, calc(1 - var(--y))));overflow:hidden;margin:0 auto;aspect-ratio:var(--ar);width:min(100%, calc(var(--cap,440px) * 16 * var(--w) / (9 * var(--h, calc(1 - var(--y))))))}
+.cs-crop img{display:block;width:calc(100% / var(--w));max-width:none;margin-left:calc(-100% * var(--x) / var(--w));margin-top:calc(-56.25% * var(--y) / var(--w))}
+.cs-figs.two{grid-template-columns:1fr 1fr;align-items:start}
+.cs-hero .cs-frame{padding:0}
+.cs-hero .cs-crop{width:100%}
+.cs-figs.two .cs-crop{--cap:380px}
+.cs-fig figcaption{margin-top:10px;font-size:13px;color:var(--c-dim)}
+.cs-ph{background:#141414;padding:34px 18px;display:grid;place-items:center}
+.wa-phone{width:min(100%,300px);aspect-ratio:9/19.3;border-radius:48px;padding:9px;background:#1b1b1d;box-shadow:inset 0 0 0 1.5px #3a3a3e,0 0 0 1px rgba(0,0,0,.06),0 24px 48px -18px rgba(0,0,0,.6);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;color:#111;-webkit-font-smoothing:antialiased}
+.wa-screen{position:relative;height:100%;border-radius:39px;overflow:hidden;display:flex;flex-direction:column;background:#ece5dd}
+.wa-status{display:flex;align-items:center;justify-content:space-between;padding:13px 22px 6px 30px;font:600 13px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:#f6f6f6}
+.wa-sig{display:flex;gap:5px;align-items:center}
+.wa-island{position:absolute;left:50%;top:9px;width:86px;height:25px;margin-left:-43px;border-radius:20px;background:#000}
+.wa-head{display:flex;align-items:center;gap:9px;padding:8px 12px 9px;background:#f6f6f6;border-bottom:.5px solid rgba(0,0,0,.12)}
+.wa-av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#d9d1f7;color:#4a32a8;font:600 11.5px/1 -apple-system,sans-serif}
+.wa-head b{display:block;font-size:14px;font-weight:600}
+.wa-head small{display:block;font-size:11px;color:#8a8a8e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-head div{min-width:0}
+.wa-body{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:10px 9px;font-size:12.5px;line-height:1.32;overflow:hidden;
+  background:#ece5dd url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="190" height="190" viewBox="0 0 190 190" fill="none" stroke="%23d9d0c3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"%3E %3Crect x="14" y="12" width="20" height="30" rx="4"/%3E%3Cpath d="M14 20h20M14 34h20"/%3E %3Cpath d="M62 18l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z"/%3E %3Cpath d="M112 12v24M122 12v24M106 20h22M106 28h22"/%3E %3Cpath d="M156 14v20a5 5 0 11-4-5M156 14l14-3v18a5 5 0 11-4-5"/%3E %3Cpath d="M20 78c0-6 9-8 11 0 2-8 11-6 11 0 0 7-11 13-11 13s-11-6-11-13z"/%3E %3Cpath d="M66 66h20l-2 24H68zM86 72h5a4 4 0 010 8h-6"/%3E %3Cpath d="M108 82a14 14 0 0128 0zM122 82v14a4 4 0 01-7 0"/%3E %3Cpath d="M160 70c8 0 10 10 3 12s-12-6-6-11 15 0 14 9-10 14-18 9"/%3E %3Ccircle cx="28" cy="134" r="12"/%3E%3Cpath d="M23 131h.1M33 131h.1M22 138c3 4 9 4 12 0"/%3E %3Cpath d="M66 140a8 8 0 010-16 11 11 0 0121 3 7 7 0 01-1 13z"/%3E %3Cpath d="M112 146c0-14 10-24 24-24 0 14-10 24-24 24zM112 146l14-14"/%3E %3Crect x="156" y="122" width="18" height="30" rx="4"/%3E%3Cpath d="M163 147h4"/%3E %3Cpath d="M18 172l8-8 8 8 8-8 8 8"/%3E%3Ccircle cx="96" cy="176" r="3"/%3E%3Cpath d="M140 168l8 14M148 168l-8 14"/%3E %3C/svg%3E') 0 0/150px 150px}
+.wa-day,.wa-sys{align-self:center;margin:4px 0;padding:4px 10px;border-radius:8px;font-size:11px;text-align:center}
+.wa-day{background:#fff;color:#667781;box-shadow:0 1px .5px rgba(0,0,0,.08)}
+.wa-sys{background:#fdf6dc;color:#8a6d1c}
+.wa-m{max-width:80%;padding:5px 8px 5px;border-radius:9px;box-shadow:0 1px .5px rgba(0,0,0,.1)}
+.wa-m.in{align-self:flex-start;background:#fff;border-top-left-radius:2px}
+.wa-m.out{align-self:flex-end;background:#d9fdd3;border-top-right-radius:2px}
+.wa-m b{display:block;font-size:11.5px;font-weight:600;margin-bottom:1px}
+.wa-m em{float:right;display:inline-flex;align-items:center;gap:2px;margin:5px 0 -3px 8px;font:400 10px/1 -apple-system,sans-serif;color:#667781}
+.wa-bar{display:flex;align-items:center;gap:10px;padding:7px 12px 26px;background:#f6f6f6;border-top:.5px solid rgba(0,0,0,.1)}
+.wa-bar span{font-size:24px;line-height:1;color:#007aff;font-weight:300}
+.wa-bar i{flex:1;height:28px;border-radius:15px;background:#fff;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)}
+.wa-home{position:absolute;left:50%;bottom:8px;width:110px;height:4px;margin-left:-55px;border-radius:3px;background:#111}
+.cs-need{position:absolute;left:12px;top:12px;padding:5px 10px;border-radius:8px;background:#ffd84d;color:#111;font:500 11.5px/1.3 "JetBrains Mono",monospace;max-width:calc(100% - 24px)}
+.cs-res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.cs-res > div{padding:20px 18px;border-radius:16px;background:var(--c-card);box-shadow:inset 0 0 0 1px var(--c-line);container-type:inline-size}
+.cs-res b{display:block;font:400 min(42px,27cqi)/1 "Host Grotesk",sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.cs-res span{display:block;margin-top:8px;font-size:13.5px;line-height:1.4;color:var(--c-dim)}
+.cs-end{margin-top:64px;padding-bottom:64px;text-align:center}
+.cs-deck.big{margin:0;padding:14px 14px 14px 22px;font-size:15.5px}
+.cs .case-next{border-color:var(--c-line);color:var(--c-ink);text-align:left}
+.cs .case-next:hover{background:var(--c-card)}
+.cs .case-next small{color:var(--c-dim)}
+.cs .case-next .arr{background:var(--c-ink);color:var(--c-bg)}
+@media (max-width:760px){
+  .cs-figs.two:not(.vids){grid-template-columns:1fr} .cs-figs.vids{gap:10px} .cs-frame{padding:10px;border-radius:12px} .cs-v{padding:0}
+ 
+  .cs-in{padding:0 18px} .cs-top{padding:40px 0 30px}
+  .cs-meta{grid-template-columns:1fr;gap:20px}
+  .cs-sec{margin-top:48px} .cs p{font-size:15.5px}
+  .cs blockquote{font-size:20px}
+  .cs-res b{font-size:34px}
+}
 
 /* mock UI pieces used in covers */
 .cv{position:absolute;inset:0}
@@ -1042,6 +1136,110 @@ svg{display:block}
   [data-tone="dark"] .dicon .lbl-s{color:#fff}
   .dicon[data-open="case:timeline"]{order:1} .dicon[data-open="case:groupify"]{order:2} .dicon[data-open="case:cora"]{order:3} .dicon[data-open="link:linkedin"]{order:4} .dicon[data-open="case:wdyt"]{order:5} .dicon[data-open="resume"]{order:6} .dicon[data-open="board"]{order:7}
 }
+/* the coloured header is a contained panel lined up with the images, not a full-width band */
+.cs-top,.cs.dark .cs-top{background:none;border:0;padding:20px 0 0}
+.cs-top > .cs-in{--pw:min(680px, 100cqi - 36px);max-width:none;width:var(--pw);padding:52px 48px 44px;border-radius:18px;background:var(--c-top)}
+@container (min-width:1200px){ .cs-top > .cs-in{--pw:920px} }
+@media (max-width:760px){ .cs-top > .cs-in{padding:30px 22px 28px} }
+/* Videos app */
+.vids-app{padding:28px 32px 48px;background:#0b0b0b;color:#f4f2ee;min-height:100%}
+.vids-app section + section{margin-top:44px}
+.vids-app header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.vids-app header .ico{width:38px;height:38px;flex:none}
+.vids-app header .ico svg{width:100%;height:100%}
+.vids-app h2{font:400 24px/1.1 "Host Grotesk",sans-serif;letter-spacing:-.01em}
+.vids-app header small{font-size:13px;color:#8a8680}
+.vids-open{margin-left:auto;padding:8px 14px;border-radius:999px;font:500 13px "Host Grotesk",sans-serif;color:#f4f2ee;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:background .15s}
+.vids-open:hover{background:rgba(255,255,255,.08)}
+.vids-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px 16px}
+.vids-grid figure{margin:0}
+.vids-tile{display:grid;place-items:center;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.09);transition:transform .2s var(--ease-out)}
+.vids-tile:hover{transform:translateY(-2px)}
+.vids-tile{position:relative}
+.vids-tile video{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.vids-play{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.6);color:#fff;backdrop-filter:blur(8px);transition:opacity .2s}
+.vids-play svg{margin-left:2px}
+.vids-tile.on .vids-play{opacity:0}
+.vids-grid figcaption{margin-top:10px}
+.vids-grid figcaption b{display:block;font:500 14.5px/1.3 "Host Grotesk",sans-serif}
+.vids-grid figcaption span{display:block;margin-top:2px;font-size:12.5px;color:#8a8680}
+@media (max-width:760px){ .vids-app{padding:20px 16px 40px} .vids-grid{grid-template-columns:1fr 1fr;gap:18px 12px} .vids-open{display:none} }
+/* Groupify: a white page, meta as a ruled table, screens in light bordered cards */
+.cs.kx{--c-bg:#fff;--c-top:#fff;--c-ink:#0a0a0a;--c-2:#2f2f2f;--c-dim:#6b6b6b;--c-card:#fff;--c-line:#e7e7e5;--c-btn:#0a0a0a}
+.cs.kx .cs-top > .cs-in{padding:56px 0 8px;background:none;border-radius:0}
+.cs.kx h1{font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.cs.kx .cs-sub{margin-top:10px;font-size:15px}
+.cs.kx .cs-meta{gap:0;margin-top:28px;border-top:1px solid var(--c-line)}
+.cs.kx .cs-meta > div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--c-line)}
+.cs.kx .cs-meta h3{margin:3px 0 0;font:400 10.5px/1.5 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--c-dim)}
+.cs.kx .cs-meta p{font-size:15px;line-height:1.6;color:var(--c-ink)}
+.cs.kx .cs-deck{margin-top:24px}
+.cs.kx h2{font-size:24px;font-weight:500;letter-spacing:-.025em;margin-bottom:12px}
+.cs.kx p{color:var(--c-ink);line-height:1.7}
+.cs.kx .cs-list p,.cs.kx .cs-credits .cs-cr{color:var(--c-2)}
+.cs.kx .cs-frame,.cs.kx .cs-frame:has(> .cs-crop){background:#f4f4f2;border:1px solid var(--c-line);box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 20px rgba(0,0,0,.05);border-radius:14px}
+.cs.kx .cs-v{background:#f4f4f2!important}
+.cs.kx .cs-ph{background:#f4f4f2}
+.cs.kx .cs-fig figcaption{font-size:14px;color:var(--c-dim)}
+.cs.kx .cs-res > div{box-shadow:none;border:1px solid var(--c-line);border-radius:14px}
+.cs.kx .cs-nav{background:color-mix(in srgb,#fff 90%,transparent)}
+@container (min-width:1200px){ .cs.kx h1{font-size:56px} .cs.kx h2{font-size:28px} }
+/* end of a case study: the deck button and the next project share one compact row */
+.cs .cs-end{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;text-align:left;margin-top:72px;padding:28px 0 56px;border-top:1px solid var(--c-line)}
+.cs .cs-end .cs-deck{margin:0}
+.cs .cs-end .case-next{width:auto;margin:0;padding:8px 8px 8px 18px;gap:14px;border-radius:999px;display:flex;align-items:center}
+.cs .cs-end .case-next small{font-size:11.5px}
+.cs .cs-end .case-next b{font:500 15px/1.2 "Host Grotesk",sans-serif}
+.cs .cs-end .case-next .arr{width:34px;height:34px}
+.vplay{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:56px 24px;background:rgba(10,10,10,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:vfade .2s ease-out}
+@keyframes vfade{from{opacity:0}}
+.vplay figure{margin:0;display:flex;flex-direction:column;align-items:center;max-height:100%}
+.vplay video{display:block;width:auto;max-width:min(92vw,100%);max-height:calc(100vh - 150px);border-radius:14px;background:#000}
+.vplay figcaption{margin-top:14px;text-align:center;color:#f4f2ee}
+.vplay figcaption b{display:block;font:500 15px/1.3 "Host Grotesk",sans-serif}
+.vplay figcaption span{display:block;margin-top:2px;font-size:13px;color:#a8a39c}
+.vplay-x{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:15px}
+.vplay-x:hover{background:rgba(255,255,255,.2)}
+/* section nav: a quiet list of sections pinned to the left, like a table of contents (hidden when there's no room for it) */
+.cs-nav{display:none}
+/* no coloured header panel any more, so the header text lines up with the column below */
+.cs-top > .cs-in{padding-left:0!important;padding-right:0!important}
+.cs-nav > div{position:absolute;left:36px;top:96px;width:140px;display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.cs-nav button{padding:4px 0;font:400 13.5px/1.3 "Host Grotesk",sans-serif;text-align:left;white-space:nowrap;color:color-mix(in srgb,var(--c-ink) 38%,transparent);transition:color .15s}
+.cs-nav button:hover{color:color-mix(in srgb,var(--c-ink) 70%,transparent)}
+.cs-nav button.on{color:var(--c-ink)}
+.cs-nav-links{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--c-line);width:110px}
+.cs-nav-links a{font:400 13.5px/1.3 "Host Grotesk",sans-serif;color:var(--c-ink);white-space:nowrap}
+.cs-nav-links a:hover{text-decoration:underline;text-underline-offset:4px}
+@container (min-width:860px){
+  .cs-nav{display:block;position:sticky;top:0;height:0;z-index:4}
+  .cs .cs-top,.cs.dark .cs-top{padding-left:210px}
+  .cs-top > .cs-in{--pw:min(680px, 100cqi - 270px)}
+  .cs > .cs-in{max-width:none;padding:0 40px 0 250px}
+  .cs > .cs-in > *{max-width:680px;margin-left:auto;margin-right:auto}
+}
+@container (min-width:1360px){
+  .cs .cs-top,.cs.dark .cs-top{padding-left:0}
+  .cs-top > .cs-in{--pw:920px}
+  .cs > .cs-in{max-width:1000px;padding:0 40px}
+  .cs > .cs-in > *{max-width:none}
+}
+.cs-figs.three{grid-template-columns:repeat(3,1fr);align-items:start}
+@media (max-width:560px){ .cs-figs.three{grid-template-columns:1fr;justify-items:center} .cs-figs.three .cs-fig{width:min(100%,280px)} }
+.cs-credits .cs-cr{margin-top:10px}
+.cs-credits h2 + .cs-cr{margin-top:0}
+.cs-link{display:table;margin-top:16px;font-size:17px;color:var(--c-ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--c-ink) 35%,transparent);text-underline-offset:5px;transition:text-decoration-color .15s}
+.cs-link:hover{text-decoration-color:currentColor}
+.cs-credits .cs-cr + .cs-link{margin-top:22px}
+/* maximised windows: a wider column and slightly larger type so the page doesn't look shrunken */
+@container (min-width:1200px){
+  .cs-in{max-width:1000px}
+  .cs h1{font-size:68px} .cs h2{font-size:38px} .cs h3{font-size:21px}
+  .cs p,.cs-meta p{font-size:17.5px} .cs-sub{font-size:17px}
+  .cs-list b,.cs-cards b{font-size:19px} .cs-list p,.cs-cards p{font-size:17.5px} .cs-chips span{font-size:16px}
+  .cs-fig figcaption{font-size:14.5px} .cs-res span{font-size:15px}
+  .cs-crop{--cap:560px} .cs-figs.two .cs-crop{--cap:480px} .cs-sec{margin-top:80px}
+}
 </style>
 </head>
 <body>
@@ -1212,7 +1410,7 @@ const ME = {
 };
 const ON_MAC = ['localhost','127.0.0.1'].includes(location.hostname); // designer-only bits (settings, photos) show only here
 
-const G = n => `assets/groupify/${String(n).padStart(2,'0')}.jpg`, T = n => `assets/timeline/${String(n).padStart(2,'0')}.jpg`;
+const G = n => `assets/groupify/${String(n).padStart(2,'0')}.jpg`, GH = n => `assets/groupify/hd/${String(n).padStart(2,'0')}.jpg`, T = n => `assets/timeline/${String(n).padStart(2,'0')}.jpg`;
 const PROJECTS = [
   { id:'timeline', name:'Timeline — social', short:'Timeline', tag:'Social · iOS', color:'#7ab8f5', dark:'#111111', bg:'#141414', year:'2025–26',
     kind:'Case study · iOS app · Parklane Studios', title:'A private feed for <em>your close friends</em>',
@@ -1231,7 +1429,7 @@ const PROJECTS = [
       ['One template, every medium','Templatised the details page so music, shows, movies and books share one structure, making new content types easy to add.'],
     ],
     shots:[[T(5),'Origin: connected, but not close'],[T(7),'Exploration: a picture-sharing app'],[T(8),'Turning point: pictures raised the bar to post'],[T(9),'Talking points'],[T(10),'Friends, not followers'],[T(11),'Streamed posts, and why we dropped them'],[T(13),'Feed: intentionally simple'],[T(14),'Seeding & growth'],[T(15),'Invite friends, earn a gold badge'],[T(17),'Posting: low effort, contextually simple'],[T(18),'Posting explorations v1'],[T(19),'Posting: current'],[T(20),'Posting shows'],[T(22),'Post anatomy'],[T(23),'Comments & reactions'],[T(25),'Collections'],[T(27),'Collection details'],[T(29),'Templatisation across music, shows, movies and books'],[T(30),'Widgets: your friends on your Home Screen'],[T(3),'The team']],
-    results:[['10k+','downloads'],['24h','posts expire, so sharing feels light'],['4','media types on one template']],
+    results:[['10k+','downloads'],['24h','before a post disappears'],['4','media types share one layout']],
     learned:'Lower the bar to post. Pictures made people self-conscious; text-first posts with songs, shows, places and photos made sharing feel effortless. And intention beats automation: on Timeline, every post is a choice someone made.' },
   { id:'groupify', name:'Groupify — creators', short:'Groupify', tag:'Creator tools · Web', color:'#b8a6ff', dark:'#6b4fd8', bg:'#f4f1fb', year:'2024',
     kind:'Case study · Web app', title:'Paid communities on WhatsApp and Telegram, <em>without the spreadsheet</em>',
@@ -1269,6 +1467,80 @@ const PROJECTS = [
     results:[['Shipped','shop, profile & settings']],
     learned:'Full case study coming soon. Happy to walk through the work on a call.' },
 ];
+
+/* Short, scrollable case studies. Images are crops of the deck slides (x = how much of the slide's left side to cut off,
+   which is usually the slide's own text). `need` marks a spot where a better image or video from Titi would go (shown on localhost only). */
+const STORIES = {
+  timeline:{
+    sub:'Parklane Studios · 2025–26',
+    role:'Product designer. I was part of the team that worked on the home feed, posting, invites, collections and onboarding, from user flows and wireframes to visual and interaction design.',
+    team:'I worked with 4 founders, another product designer, 2 engineers and a product manager.',
+    hero:{vid:'assets/timeline/video/feed-hero.mp4', ar:'16/9', bg:'#2fd0f5', label:'The home feed'},
+    blocks:[
+      {h:'Overview', p:['Timeline is a social network for close friends. No algorithms, just a feed of the people you love, built around the music, shows and books that matter to you.',
+        'Over a year ago we started asking how we really connect with the people we love. We were always online, but we rarely saw what was going on in the lives of the people closest to us.']},
+      {h:'The first version', nav:'First version', p:['Our first version was a picture-sharing app. People shared photos of their day and their friends reacted.',
+        'It raised the bar for posting. Pictures made people self-conscious and chase perfection, so they posted less. We had to rethink the picture-first approach.'],
+        imgs:[{src:T(7), x:.486, w:.4825, y:.0667, h:.867, cap:'Version one: a picture-sharing app'}]},
+      {h:'What people share', nav:'Research', p:['We asked people what they naturally talk about with their friends and family. One question changed the product: at the end of my day, what am I most likely to do a recap on?',
+          'The answers became Timeline’s post types: music, movies and shows, books, places, pictures and thoughts.']},
+      {h:'The feed', nav:'The feed', p:['Connection should be personal and leave room to be your true self. So the feed is intentionally simple: reverse chronological, close friends only, and posts expire after 24 hours.'],
+        imgs:[{src:T(13), x:.4775, w:.491, y:.0533, h:.891, cap:'The feed'}]},
+      {h:'Posting', nav:'Posting', p:['Text comes first. Songs, shows, books, polls and photos are one tap away for when words aren’t enough.'],
+        imgs:[{vid:'assets/timeline/video/post-types.mp4', ar:'1/1', bg:'#fff', cap:'Every post type is one tap from the feed'},{vid:'assets/timeline/video/feed.mp4', ar:'1/1', bg:'#fff', cap:'Sharing a show you’re watching'}]},
+      {h:'Inviting friends', p:['Timeline only works if your friends are there too. Onboarding surfaces friends who are already on Timeline, you get an alert when a friend joins, and inviting close friends earns you a gold badge.'],
+        imgs:[{src:T(14), x:.479, w:.49, y:.0533, h:.893, cap:'Onboarding that finds your friends'}]},
+      {h:'Pokes', nav:'Pokes', p:['Sometimes you just want to say hi. Tap or hold to poke a friend, pick an emoji, and watch the count go up. Friends can poke back, or share the count to their Timeline.'],
+        imgs:[{vid:'assets/timeline/video/pokes-send.mp4', ar:'640/1226', bg:'#111', cap:'Sending pokes'},{vid:'assets/timeline/video/pokes-share.mp4', ar:'640/1226', bg:'#111', cap:'Getting poked, and sharing it'}]},
+      {h:'Collections', nav:'Collections', p:['Collect songs, movies and books you love, or save something a friend shared for later.',
+        'I templatised the details page so music, shows, movies and books share one structure. New content types are easy to add.'],
+        imgs:[{vid:'assets/timeline/video/collect-shows.mp4', ar:'3/4', bg:'#9cc3ee', cap:'Adding shows to your catalog'},{vid:'assets/timeline/video/music-details.mp4', ar:'3/4', bg:'#9cc3ee', cap:'From a post to the details page'}],
+        imgs2:[{src:T(29), x:0, cap:'One layout for music, shows, movies and books'}]},
+      {h:'The app in use', p:['Three everyday flows: writing a post, opening a song from the feed, and saving a show to a collection.'],
+        imgs:[{vid:'assets/timeline/video/create-post.mp4', ar:'608/1080', bg:'#fff', cap:'Creating a post'},{vid:'assets/timeline/video/song-details.mp4', ar:'608/1080', bg:'#fff', cap:'Opening song details'},{vid:'assets/timeline/video/add-to-collection.mp4', ar:'608/1080', bg:'#fff', cap:'Adding a post to a collection'}]},
+      {h:'Widgets', p:['Widgets put your friends’ latest posts on your Home Screen, without opening the app.'],
+        imgs:[{src:T(30), x:.276, w:.714, y:.0533, h:.889, cap:'Widgets'}]},
+    ],
+    results:[['10k+','downloads'],['24h','before a post disappears'],['4','media types share one layout']],
+    learned:[['Lower the bar to post','Pictures made people self-conscious. Text-first posts with songs, shows, places and photos made sharing feel effortless.'],
+             ['Intention beats automation','We tested auto-posting from streaming apps and it filled the feed with content nobody chose. On Timeline, every post is a choice someone made.'],
+             ['One layout for every media type','Sharing one structure across music, shows, movies and books made new content types easy to add.']],
+    more:{h:'More screens', imgs:[{src:T(32), x:0, cap:'Birthdays, streaks and more'},{src:T(33), x:0, cap:'Notifications and milestones'},{src:T(34), x:0, cap:'Recommendations and settings'}]},
+    links:[['App Store','https://apps.apple.com/ng/app/timeline-feed-with-friends/id6745633254'],['Website','https://timeline.parklane.xyz/'],['TechCabal feature','https://techcabal.com/2026/04/09/timeline-an-app-for-sharing-your-personal-life-with-your-friends-launches/']],
+  },
+  groupify:{
+    sub:'Web app · 2024',
+    role:'Associate product designer. User flows, wireframing, visual design and interaction design for group creation, payments, group pages and sales pages.',
+    team:'A team of 7: the founders, 3 designers, engineers and marketing.',
+    hero:{vid:'assets/groupify/video/dashboard.mp4', ar:'16/9', bg:'#f4f4f2', label:'Creator dashboard'},
+    blocks:[
+      {h:'Overview', p:['Groupify lets creators run paid communities on WhatsApp and Telegram. It creates the groups, manages invites and members, and collects payments, so creators can focus on their content and community.']},
+      {h:'The problem', nav:'Problem', p:['Our creators, mostly in Nigeria and often working from their computers, already had audiences willing to pay. Setting up and running groups by hand slowed them down in three ways.'],
+        list:[['Every platform worked differently','WhatsApp and Telegram each had their own requirements for a group.'],['Members needed more to say yes','Creators didn’t know what information people needed before they would join and pay.'],['Limits showed up too late','Creators only found each platform’s restrictions when they hit them.']],
+        q:['The brief','How might we reduce the effort of creating a group, while still capturing all the information users need to see?'],
+        imgs:[{src:GH(7), x:.401, w:.534, y:.211, h:.672, cap:'Reducing the effort of creating a group', shot:true}]},
+      {h:'Our principles', nav:'Principles', p:['Before designing anything, we mapped how group creation worked on WhatsApp and Telegram to understand why it broke down. That gave us four principles for every screen.'],
+        list:[['Simplicity','Quick and intuitive to create, without losing anything members need to see.'],['Scale','One creation flow for any group, on any platform, with any payment setup.'],['Control','Creators stay in charge of their members, pricing and payments.'],['Speed','From idea to a live group in as few steps as possible.']]},
+      {h:'Creating a group', nav:'Creating a group', p:['Everything a creator needs to get started is on one screen, with context about each platform so they can choose without knowing the market.'],
+        imgs:[{vid:'assets/groupify/video/create-group.mp4', ar:'16/10', bg:'#f4f4f2', cap:'Create group'}]},
+      {h:'Payments', nav:'Payments', p:['One-time or subscription, multiple currencies, autofill and grace periods. The screen does what creators used to do in a spreadsheet.'],
+        imgs:[{src:GH(12), x:.401, w:.534, y:.168, cap:'Payment details', shot:true}]},
+      {h:'The admin bot', nav:'Admin bot', p:['Groupify’s bot acts as the group admin. It adds members when they pay and removes them when their subscription lapses.'],
+        imgs:[{src:GH(13), x:.401, w:.534, y:.212, h:.672, cap:'Adding the admin bot', shot:true}],
+        imgs2:[{phone:'wa', cap:'The bot at work in a WhatsApp group'}]},
+      {h:'Group and sales pages', nav:'Sales pages', p:['Creators see every community at a glance, with capacity, platform and category on each card.',
+        'For buyers, the sales page highlights the information they need to decide to pay, and what makes each creator different.'],
+        imgs:[{vid:'assets/groupify/video/members.mp4', ar:'16/10', bg:'#f4f4f2', cap:'Group page, with every member at a glance'}],
+        imgs2:[{vid:'assets/groupify/video/sales-page.mp4', ar:'16/10', bg:'#f4f4f2', cap:'The sales page buyers see'}]},
+    ],
+    results:[['3,140','creators'],['5,000+','paid groups'],['98k','group members'],['$200k+','earned for creators']],
+    learned:[['Designing for two audiences','Every screen served both the creator and the member paying to join. Change one field in the create flow and the buyer’s sales page changed minutes later.'],
+             ['Sharing work early','I shared rough work every week instead of waiting until it felt finished. The feedback made the work better, faster.']],
+    links:[['groupify.co','https://www.groupify.co/']],
+    credits:{p:'I worked on these flows as part of Groupify’s team, and the work shown here was a collaborative effort.',
+      lines:['Founders · Franklin Douglas, Damola Adegoke, Ojimaojo Udale Ameh and Orinami Olatunji','Product design · Titi Duyile and Rue Douglas','Engineering · Olamide Sholanke and Akinbode Akinlolu','Marketing · Promise Soore']},
+  },
+};
 
 const QUOTES = []; // TODO: add real quotes (LinkedIn recommendations work great) and the "kind words" app comes back
 
@@ -1319,6 +1591,7 @@ const ICON = {
   spotlight: SQ({fill:'#1c1a1f'},`<circle cx="27" cy="27" r="9" stroke="#fff" stroke-width="3" fill="none"/><path d="M34 34l9 9" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>`),
   moon: SQ({fill:'#2a2433'},`<path d="M40 34a12 12 0 01-14-14 12 12 0 1014 14z" fill="#ffd25e"/>`),
   prefs: SQ({defs:'<linearGradient id="ipf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e96"/></linearGradient>',fill:'url(#ipf)'},`<g transform="translate(30 30)"><circle r="15" fill="#4a4a52"/><g fill="#4a4a52">${[...Array(8)].map((_,i)=>`<rect x="-3.5" y="-20" width="7" height="9" rx="1.5" transform="rotate(${i*45})"/>`).join('')}</g><circle r="9.5" fill="#d9d9de"/><circle r="5" fill="#4a4a52"/></g>`),
+  videos: SQ({defs:'<linearGradient id="ivd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a40"/><stop offset="1" stop-color="#141416"/></linearGradient>',fill:'url(#ivd)'},`<rect x="12" y="17" width="36" height="26" rx="4" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M27 24.5v11l9-5.5z" fill="#fff"/><g fill="#fff" opacity=".55"><rect x="15" y="12" width="4" height="3" rx="1"/><rect x="24" y="12" width="4" height="3" rx="1"/><rect x="33" y="12" width="4" height="3" rx="1"/><rect x="42" y="12" width="4" height="3" rx="1"/><rect x="15" y="45" width="4" height="3" rx="1"/><rect x="24" y="45" width="4" height="3" rx="1"/><rect x="33" y="45" width="4" height="3" rx="1"/><rect x="42" y="45" width="4" height="3" rx="1"/></g>`),
   spotify: SQ({fill:'#121212'},`<circle cx="30" cy="30" r="17" fill="#1ed760"/><g fill="none" stroke="#121212" stroke-linecap="round"><path d="M20.5 25c6.5-2 13.5-1.4 19 1.6" stroke-width="3.2"/><path d="M21.8 30.6c5.3-1.5 11-1 15.6 1.4" stroke-width="2.7"/><path d="M23 35.6c4.2-1 8.6-.7 12.2 1" stroke-width="2.2"/></g>`),
   linkedin: SQ({fill:'#0a66c2'},`<text x="30" y="40" text-anchor="middle" font-family="Inter" font-weight="800" font-size="24" fill="#fff">in</text>`),
 };
@@ -1463,6 +1736,120 @@ function mountFinder(w){
   side.addEventListener('click',e=>{ const b=e.target.closest('[data-filter]'); if(!b) return; filter=b.dataset.filter; $$('[data-filter]',side).forEach(x=>x.classList.toggle('on',x===b)); draw(); });
   $$('.tb [data-view-set]',w).forEach(b=>b.onclick=()=>{ view=b.dataset.viewSet; $$('.tb [data-view-set]',w).forEach(x=>x.classList.toggle('on',x===b)); draw(); });
   draw();
+}
+
+const WA_PHONE=(()=>{
+  const tick='<svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="#53bdeb" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5l3 3 6-7.5M6.5 8.5l1 0 6.5-7.5"/></svg>';
+  const msg=(side,body,{who,col,t='12:00'}={})=>`<div class="wa-m ${side}">${who?`<b style="color:${col}">${who}</b>`:''}<span>${body}<em>${t}${side==='out'?tick:''}</em></span></div>`;
+  return `<div class="wa-phone" role="img" aria-label="A WhatsApp group chat where the Groupify bot welcomes a new member and removes one whose subscription lapsed">
+    <div class="wa-screen">
+      <div class="wa-status"><span>9:41</span><i class="wa-island"></i><span class="wa-sig"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="21" height="10" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="7" rx="1.6" fill="currentColor"/><path d="M23 4v3" stroke="currentColor" opacity=".4"/></svg></span></div>
+      <div class="wa-head"><svg width="10" height="17" viewBox="0 0 10 17" fill="none" stroke="#007aff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1.5L2 8.5l6.5 7"/></svg><span class="wa-av">FS</span><div><b>Fitness Squad</b><small>Groupify Bot, Damola, Tobi, You</small></div></div>
+      <div class="wa-body">
+        ${msg('in','Morning squad 💪 Session is at 6am tomorrow, same park. Bring water.',{who:'Damola',col:'#1f8f5f',t:'08:12'})}
+        ${msg('in','I’ll be there',{who:'Tobi',col:'#e2640c',t:'08:20'})}
+        ${msg('out','Count me in',{t:'08:21'})}
+        <div class="wa-sys">🤖 Groupify Bot added Amaka</div>
+        ${msg('in','Welcome to the group, Amaka 👋 Your monthly plan is active.',{who:'Groupify Bot',col:'#7a5af8',t:'11:58'})}
+        ${msg('out','Welcome to the group',{t:'12:00'})}
+        ${msg('in','Damola is back in his original bag. What do you think about it?',{who:'Tobi',col:'#e2640c',t:'12:01'})}
+        ${msg('out','Dope',{t:'12:01'})}
+        <div class="wa-sys">🤖 Groupify Bot removed Douglas</div>
+        ${msg('in','Douglas’s subscription lapsed. He can rejoin any time from the group link.',{who:'Groupify Bot',col:'#7a5af8',t:'12:05'})}
+      </div>
+      <div class="wa-bar"><span>+</span><i></i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="3"/><circle cx="12" cy="12.5" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><svg width="14" height="18" viewBox="0 0 14 20" fill="none" stroke="#007aff" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="1" width="7" height="12" rx="3.5"/><path d="M1 10a6 6 0 0012 0M7 16v3"/></svg></div>
+      <i class="wa-home"></i>
+    </div></div>`;
+})();
+
+function storyHTML(p){
+  const s=STORIES[p.id], dark=p.id==='timeline';
+  const fig=f=>f.phone?`<figure class="cs-fig"><div class="cs-frame cs-ph">${WA_PHONE}</div>${f.cap?`<figcaption>${f.cap}</figcaption>`:''}</figure>`
+    :f.img?`<figure class="cs-fig"><div class="cs-frame cs-v"><img src="${f.img}" alt="${esc(f.cap||p.short)}" loading="lazy"></div>${f.cap?`<figcaption>${f.cap}</figcaption>`:''}</figure>`
+    :f.vid?`<figure class="cs-fig"><div class="cs-frame cs-v" style="background:${f.bg||'#111'}"><video data-src="${f.vid}" poster="${f.vid.replace(/\.mp4$/,'.jpg')}" muted loop playsinline preload="none" style="aspect-ratio:${f.ar}"></video></div>${f.cap?`<figcaption>${f.cap}</figcaption>`:''}</figure>`
+    :`<figure class="cs-fig${f.shot?' shot':''}"><div class="cs-frame"><div class="cs-crop" style="--x:${f.x||0}${f.w?';--w:'+f.w:''}${f.y!=null?';--y:'+f.y:''}${f.h?';--h:'+f.h:''}"><img src="${f.src}" alt="${esc(f.cap||p.short)}" loading="lazy"></div></div>${f.cap?`<figcaption>${f.cap}</figcaption>`:''}${f.need&&ON_MAC?`<span class="cs-need">Swap in: ${f.need}</span>`:''}</figure>`;
+  const num=true;
+  const figs=a=>a?`<div class="cs-figs${a.length>2?' three':a.length>1?' two':''}${a[0].vid?' vids':''}">${a.map(fig).join('')}</div>`:'';
+  const next=PROJECTS.find(q=>q!==p&&STORIES[q.id]);
+  const cards=a=>`<div class="cs-cards${a.length===4?' four':''}">${a.map(([t,d])=>`<div><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  return `<article class="cs${dark?' dark':' kx'}"${s.btn?` style="--c-btn:${s.btn}"`:''}>
+    ${(()=>{ const nav=[['Intro','cs-top'],...s.blocks.map((b,i)=>b.nav&&[b.nav,'b'+i]).filter(Boolean),['Results','res'],['Learnings','learned'],...(s.credits?[['Credits','credits']]:[])];
+      const links=s.links||[];
+      return `<nav class="cs-nav" aria-label="Sections"><div>${nav.map(([t,id],i)=>`<button data-go="${id}"${i?'':' class="on"'}>${t}</button>`).join('')}${links.length?`<span class="cs-nav-links">${links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</div></nav>`; })()}
+    <header class="cs-top" data-sec="cs-top"><div class="cs-in">
+      <h1>${p.short}</h1><div class="cs-sub">${s.sub}</div>
+      <div class="cs-meta"><div><h3>My role</h3><p>${s.role}</p></div><div><h3>The team</h3><p>${s.team}</p></div></div>
+      <button class="cs-deck" data-open="deck:${p.id}">See the full case study <span>${p.deck.length} slides →</span></button>
+    </div></header>
+    <div class="cs-in">
+      <div class="cs-hero">${fig(s.hero)}</div>
+      ${s.blocks.map((b,i)=>`<section class="cs-sec" data-sec="b${i}"><h2>${b.h}</h2>${b.p.map(t=>`<p>${t}</p>`).join('')}
+        ${b.list?`<ol class="cs-list${num?'':' bare'}">${b.list.map(([t,d],j)=>`<li>${num?`<i>${j+1}.</i>`:''}<div><b>${t}</b><p>${d}</p></div></li>`).join('')}</ol>`:''}
+        ${b.q?`<p>${b.q[0]}: ${b.q[1]}</p>`:''}${b.after?`<p>${b.after}</p>`:''}
+        ${b.chips?`<div class="cs-chips">${b.chips.map(c=>`<span>${c}</span>`).join('')}</div>`:''}
+        ${b.cards?cards(b.cards):''}
+        ${figs(b.imgs)}${figs(b.imgs2)}</section>`).join('')}
+      <section class="cs-sec" data-sec="res"><h2>Results</h2><div class="cs-res">${s.results.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></section>
+      <section class="cs-sec" data-sec="learned"><h2>What I learned</h2><ol class="cs-list${num?'':' bare'}">${s.learned.map(([t,d],j)=>`<li>${num?`<i>${j+1}.</i>`:''}<div><b>${t}</b><p>${d}</p></div></li>`).join('')}</ol></section>
+      ${s.more?`<section class="cs-sec" data-sec="more"><h2>${s.more.h}</h2>${(s.more.p||[]).map(t=>`<p>${t}</p>`).join('')}${s.more.team?cards(s.more.team):''}${(s.more.imgs||[]).map(fig).join('')}</section>`:''}
+      ${s.credits?`<section class="cs-sec cs-credits" data-sec="credits"><h2>Links &amp; credits</h2>${s.credits.p?`<p>${s.credits.p}</p>`:''}${s.credits.lines.map(t=>`<p class="cs-cr">${t}</p>`).join('')}${(s.credits.links||[]).map(([t,u])=>`<a class="cs-link" href="${u}" target="_blank" rel="noopener">${t} <span aria-hidden="true">↗</span></a>`).join('')}</section>`:''}
+      <div class="cs-end">
+        <button class="cs-deck" data-open="deck:${p.id}">Full case study <span>${p.deck.length} slides</span></button>
+        ${next?`<button class="case-next" data-open="case:${next.id}" data-replace><div><small>Next project</small><b>${next.short}</b></div><span class="arr"><svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg></span></button>`:''}
+      </div>
+    </div></article>`;
+}
+
+/* every product video from the case studies, grouped by project */
+function videosHTML(){
+  const groups=PROJECTS.filter(p=>STORIES[p.id]).map(p=>{ const s=STORIES[p.id];
+    const v=[s.hero,...s.blocks.flatMap(b=>[...(b.imgs||[]),...(b.imgs2||[])].map(f=>({...f,sec:b.h})))].filter(f=>f&&f.vid);
+    return {p,v}; });
+  return `<div class="vids-app">${groups.map(({p,v})=>`<section><header><span class="ico">${projIcon(p)}</span><div><h2>${p.short}</h2><small>${v.length} videos · ${p.tag}</small></div>
+      <button class="vids-open" data-open="case:${p.id}">Read the case study →</button></header>
+    <div class="vids-grid">${v.map(f=>`<figure><button class="vids-tile" style="background:${f.bg||'#111'}" aria-label="Play ${esc(f.label||f.cap)}"><video data-src="${f.vid}" poster="${f.vid.replace(/\.mp4$/,'.jpg')}" muted loop playsinline preload="none"></video><i class="vids-play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M4 2.5v9l7.5-4.5z" fill="currentColor"/></svg></i></button>
+      <figcaption><b>${f.label||f.cap}</b><span>${f.sec||'Overview'}</span></figcaption></figure>`).join('')}</div></section>`).join('')}</div>`;
+}
+
+// Videos app: posters until you hover a tile (playing all of them at once makes the browser pause them); click to open the player
+function mountVideos(w){
+  const go=v=>{ if(!v.src) v.src=v.dataset.src; v.play().catch(()=>{}); };
+  $$('.vids-tile',w).forEach(t=>{ const v=$('video',t);
+    t.addEventListener('mouseenter',()=>{ go(v); t.classList.add('on'); });
+    t.addEventListener('mouseleave',()=>{ v.pause(); t.classList.remove('on'); });
+    t.addEventListener('click',()=>openPlayer(v.dataset.src,t.closest('figure').querySelector('figcaption').innerHTML)); });
+}
+// a lightbox player: the video is never drawn bigger than its real size, so it stays sharp
+function openPlayer(src,cap){
+  const o=document.createElement('div'); o.className='vplay'; o.setAttribute('role','dialog'); o.setAttribute('aria-label','Video');
+  o.innerHTML=`<figure><video src="${src}" poster="${src.replace(/\.mp4$/,'.jpg')}" autoplay muted loop playsinline controls></video><figcaption>${cap}</figcaption></figure><button class="vplay-x" aria-label="Close">✕</button>`;
+  const v=$('video',o), close=()=>{ v.pause(); o.remove(); document.removeEventListener('keydown',esc); }, esc=e=>{ if(e.key==='Escape') close(); };
+  v.addEventListener('loadedmetadata',()=>{ v.style.maxWidth=v.videoWidth/Math.max(1,Math.min(devicePixelRatio,1.5))+'px'; });
+  o.addEventListener('click',e=>{ if(e.target===o||e.target.closest('.vplay-x')) close(); });
+  document.addEventListener('keydown',esc); document.body.appendChild(o); v.play().catch(()=>{});
+}
+
+function mountStory(w){
+  // videos load when they first come near the screen and only play while visible
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target; v._on=e.isIntersecting;
+    if(e.isIntersecting){ if(!v.src){ v.src=v.dataset.src; v.load(); v.addEventListener('canplay',()=>{ if(v._on) v.play().catch(()=>{}); },{once:true}); } v.play().catch(()=>{}); } else v.pause(); }),{root:w.querySelector('.wb'),rootMargin:'200px 0px'});
+  $$('video[data-src]',w).forEach(v=>io.observe(v));
+  // the open animation can confuse the observer, so once the window has settled start whatever is on screen
+  setTimeout(()=>{ const r=w.querySelector('.wb').getBoundingClientRect(); $$('video[data-src]',w).forEach(v=>{ const a=v.getBoundingClientRect();
+    if(a.bottom>r.top&&a.top<r.bottom&&a.width){ v._on=true; if(!v.src) v.src=v.dataset.src; v.play().catch(()=>{}); } }); },700);
+  // section nav: click jumps to a section, and the section in view stays highlighted
+  const wb=w.querySelector('.wb'), nav=w.querySelector('.cs-nav'); if(!nav) return;
+  const btns=$$('[data-go]',nav), secs=btns.map(b=>w.querySelector(`[data-sec="${b.dataset.go}"]`));
+  nav.onclick=e=>{ const b=e.target.closest('[data-go]'); if(!b) return; const t=w.querySelector(`[data-sec="${b.dataset.go}"]`);
+    wb.scrollTo({top:t.getBoundingClientRect().top-wb.getBoundingClientRect().top+wb.scrollTop-24,behavior:reduce?'auto':'smooth'}); };
+  const mark=()=>{ const top=wb.getBoundingClientRect().top+120; let cur=secs[0];
+    for(const x of secs) if(x.getBoundingClientRect().top<=top) cur=x;
+    if(wb.scrollTop+wb.clientHeight>=wb.scrollHeight-4) cur=secs[secs.length-1];
+    btns.forEach(b=>{ const on=b.dataset.go===cur.dataset.sec; b.classList.toggle('on',on); }); };
+  wb.addEventListener('scroll',()=>requestAnimationFrame(mark),{passive:true});
+  // keep the list vertically centred in the window, whatever its size
+  const list=nav.firstElementChild, centre=()=>{ list.style.top=Math.max(24,(wb.clientHeight-list.offsetHeight)/2)+'px'; };
+  new ResizeObserver(centre).observe(wb); centre();
 }
 
 function caseHTML(p){
@@ -1978,6 +2365,7 @@ const WINDOWS = {
   readme:  {title:'60-second summary', app:'TextEdit', icon:()=>ICON.readme, w:640,h:700, html:readmeHTML, mount:wireGreet},
   board:   {title:'how_i_work', app:'Board', icon:()=>ICON.board, w:940,h:560, html:boardHTML, mount:mountBoard},
   photos:  {title:'me.jpg', app:'Photos', icon:()=>ICON.jpg, w:760,h:560, html:photosHTML, mount:mountPhotos},
+  videos:  {title:'Videos', app:'Videos', icon:()=>ICON.videos, w:980,h:680, html:videosHTML, mount:mountVideos},
   music:   {title:'Spotify', app:'Spotify', icon:()=>ICON.spotify, w:980,h:640, html:musicHTML, mount:mountMusic},
   prefs:   {title:'Settings', app:'System Settings', icon:()=>ICON.prefs, w:860,h:600, html:prefsHTML, mount:mountPrefs},
   calendar:{title:'Calendar', app:'Calendar', icon:()=>ICON.calendar, w:980,h:600, html:calendarHTML, mount:mountCalendar},
@@ -1992,7 +2380,12 @@ const WINDOWS = {
 function def(id){
   if(id.startsWith('case:')){
     const p=PROJECTS.find(p=>p.id===id.slice(5)); if(!p) return null;
+    if(STORIES[p.id]) return {title:p.name, app:'Preview', icon:()=>projIcon(p), w:1000,h:820, html:()=>storyHTML(p), mount:mountStory, isCase:true};
     return {title:p.name, app:'Keynote', icon:()=>projIcon(p), w:p.deck?1180:920,h:p.deck?780:820, html:()=>caseHTML(p), mount:p.deck?mountDeck:null, isCase:true};
+  }
+  if(id.startsWith('deck:')){ // the full slide deck, opened from a case study
+    const p=PROJECTS.find(p=>p.id===id.slice(5)); if(!p||!p.deck) return null;
+    return {title:p.short+' — full case study', app:'Keynote', icon:()=>projIcon(p), w:1180,h:780, html:()=>caseHTML(p), mount:mountDeck};
   }
   return WINDOWS[id];
 }
@@ -2045,7 +2438,7 @@ function morphWin(w,id){
   open.delete(old); open.set(id,w); w.dataset.id=id;
   $('.tt',w).textContent=d.title; $('.ti',w).innerHTML=d.icon();
   const wb=$('.wb',w);
-  const swap=()=>{ wb.innerHTML=d.html(); wb.scrollTop=0; };
+  const swap=()=>{ wb.innerHTML=d.html(); wb.scrollTop=0; if(d.mount) d.mount(w); };
   if(reduce) swap(); else wb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-10px)'}],{duration:160,easing:'ease-in'}).onfinish=()=>{ swap(); wb.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:320,easing:'cubic-bezier(.2,.9,.25,1)'}); };
 }
 function animateFrom(w, origin){
@@ -2172,6 +2565,7 @@ const DESK = [
 const DOCK = [
   {id:'finder', label:'Work', icon:()=>ICON.finder},
   {id:'about', label:'About me', icon:()=>ICON.about},
+  {id:'videos', label:'Videos', icon:()=>ICON.videos},
   ...(ON_MAC?[{id:'board', label:'How I work', icon:()=>ICON.board, hide:true}]:[]),
   {id:'calendar', label:'Book a chat', icon:()=>ICON.calendar},
   ...(QUOTES.length?[{id:'notes', label:'Kind words', icon:()=>ICON.notes}]:[]),
