@@ -2964,5 +2964,12 @@ if(S.agentation!==false && (['localhost','127.0.0.1'].includes(location.hostname
   createRoot(el).render(React.createElement(Agentation));
 }
 </script>
+<!-- Vercel Web Analytics: visits only, no cookies; skipped on localhost so local testing isn't counted -->
+<script>
+if(!['localhost','127.0.0.1'].includes(location.hostname)){
+  window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};
+  const s=document.createElement('script'); s.defer=true; s.src='/_vercel/insights/script.js'; document.head.appendChild(s);
+}
+</script>
 </body>
 </html>
