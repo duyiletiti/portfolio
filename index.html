@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Titilayo Duyile — Product Designer</title>
 <meta name="description" content="Titilayo Duyile is a product designer working on social, creator and AI products. Explore the portfolio as a tiny operating system.">
@@ -1246,7 +1247,7 @@ svg{display:block}
 
 <!-- ================= INTRO: the portfolio gets drawn as a frame ================= -->
 <div class="fx" id="fx" hidden aria-hidden="true">
-  <script>try{ var S={}; try{ S=JSON.parse(localStorage.getItem('rose-settings'))||{}; }catch(e){} var q=location.search, f=/[?&]intro/.test(q); if((f || ((S.startup||'intro')==='intro')) && !/[?&]skip/.test(q) && (f || !matchMedia('(prefers-reduced-motion: reduce)').matches)){ document.documentElement.classList.add('fx-on'); document.currentScript.parentNode.hidden=false; } }catch(e){}</script>
+  <script>try{ var S={}; try{ S=JSON.parse(localStorage.getItem('rose-settings'))||{}; }catch(e){} var q=location.search, f=/[?&]intro/.test(q); if(location.pathname.length<2 && (f || ((S.startup||'intro')==='intro')) && !/[?&]skip/.test(q) && (f || !matchMedia('(prefers-reduced-motion: reduce)').matches)){ document.documentElement.classList.add('fx-on'); document.currentScript.parentNode.hidden=false; } }catch(e){}</script>
   <div class="fx-canvas"></div>
   <div class="fx-frame" id="fxFrame"></div>
   <div class="fx-ui">
@@ -2395,6 +2396,17 @@ function def(id){
    ========================================================= */
 const winsEl=$('#wins'); let Z=10, cascade=0;
 const open = new Map(); // id -> element
+/* each window gets its own address (/work/timeline, /resume, /videos…), so links can be shared, Back closes the window
+   and analytics counts which windows people open */
+const pathFor=id=>!id?'/':id.startsWith('case:')?'/work/'+id.slice(5):'/'+id;
+function idFor(path){ const m=path.replace(/\/+$/,'').match(/^\/(?:work\/([\w-]+)|([\w-]+))$/); if(!m) return null;
+  if(m[1]) return PROJECTS.some(p=>p.id===m[1]&&!p.url)?'case:'+m[1]:null; return WINDOWS[m[2]]?m[2]:null; }
+let routing=false, here=null, step=history.state?.step||0; // here = the window the address points at; step counts history entries
+function route(id,replace){ if(routing) return; here=id||null; const p=pathFor(id); if(p===location.pathname) return;
+  if(!replace) step++; history[replace?'replaceState':'pushState']({id:here,step},'',p+location.search+location.hash); }
+addEventListener('popstate',e=>{ const id=idFor(location.pathname), from=here, back=(e.state?.step||0)<step;
+  here=id; step=e.state?.step||0; routing=true;
+  try{ if(back && from && from!==id && open.has(from)) closeWin(from); if(id) openWin(id); } finally{ routing=false; } });
 function bounds(){ const dockH=isMobile()?0:96; return {x:8,y:parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))+8,w:innerWidth-16,h:innerHeight-dockH-parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mb'))-16}; }
 
 function openWin(id, origin, opts){
@@ -2404,7 +2416,7 @@ function openWin(id, origin, opts){
   closeMenu();
   // case → reuse the existing case window when navigating "next project"
   if(origin && origin.hasAttribute && origin.hasAttribute('data-replace')){
-    const host=origin.closest('.win'); if(host){ morphWin(host,id); return; }
+    const host=origin.closest('.win'); if(host && !open.has(id)){ morphWin(host,id); return; }
   }
   if(open.has(id)){ const w=open.get(id); if(w.classList.contains('min')) restoreWin(w); focusWin(w); if(opts&&id==='mail') { $('#mSub',w).value=opts.subject||''; $('textarea',w).value=opts.body||''; } return w; }
 
@@ -2435,7 +2447,7 @@ function openWin(id, origin, opts){
 }
 function morphWin(w,id){
   const d=def(id), old=w.dataset.id;
-  open.delete(old); open.set(id,w); w.dataset.id=id;
+  open.delete(old); open.set(id,w); w.dataset.id=id; route(id,true);
   $('.tt',w).textContent=d.title; $('.ti',w).innerHTML=d.icon();
   const wb=$('.wb',w);
   const swap=()=>{ wb.innerHTML=d.html(); wb.scrollTop=0; if(d.mount) d.mount(w); };
@@ -2449,7 +2461,8 @@ function animateFrom(w, origin){
   const dx=ox-(r.left+r.width/2), dy=oy-(r.top+r.height/2);
   w.animate([{transform:`translate(${dx}px,${dy}px) scale(.12)`,opacity:0,borderRadius:'40px'},{opacity:1,offset:.35},{transform:'none',opacity:1}],{duration:480,easing:'cubic-bezier(.2,.9,.25,1)'});
 }
-function focusWin(w){
+function focusWin(w,quiet){
+  route(w.dataset.id,quiet);
   $$('.win').forEach(x=>x.classList.remove('front'));
   w.classList.add('front'); w.style.zIndex=++Z;
   const d=def(w.dataset.id); $('#mbApp').textContent=d?d.app:'Rose OS';
@@ -2458,14 +2471,14 @@ function topWin(){ return $$('.win:not(.min)').sort((a,b)=>b.style.zIndex-a.styl
 function closeWin(id){
   const w=open.get(id); if(!w) return;
   open.delete(id);
-  const done=()=>{ w.remove(); const t=topWin(); if(t) focusWin(t); else $('#mbApp').textContent='Rose OS'; syncDock(); };
+  const done=()=>{ w.remove(); const t=topWin(); if(t) focusWin(t,true); else { route(null,true); $('#mbApp').textContent='Rose OS'; } syncDock(); };
   if(reduce) return done();
   w.animate(isMobile()?[{transform:'none'},{transform:'translateY(100%)'}]:[{transform:'none',opacity:1},{transform:'scale(.94)',opacity:0}],{duration:isMobile()?320:180,easing:'ease-in'}).onfinish=done;
 }
 function minimizeWin(w){
   const dk=dockFor(w.dataset.id); const r=w.getBoundingClientRect();
   w.classList.add('min');
-  const fin=()=>{ w.style.display='none'; const t=topWin(); if(t) focusWin(t); else $('#mbApp').textContent='Rose OS'; syncDock(); };
+  const fin=()=>{ w.style.display='none'; const t=topWin(); if(t) focusWin(t,true); else { route(null,true); $('#mbApp').textContent='Rose OS'; } syncDock(); };
   if(reduce||!dk) return fin();
   const o=dk.getBoundingClientRect();
   w.animate([{transform:'none',opacity:1},{transform:`translate(${o.left+o.width/2-(r.left+r.width/2)}px,${o.top-(r.top+r.height/2)}px) scale(.06)`,opacity:.3}],{duration:420,easing:'cubic-bezier(.5,0,.2,1)'}).onfinish=fin;
@@ -2943,6 +2956,9 @@ if(/[?&]settings/.test(location.search) || sstore('settings-open')){ sstore('set
 
 (function boot(){
   const q=location.search, forced=/[?&]intro/.test(q);
+  const deep=idFor(location.pathname);
+  if(deep){ $('#lock').hidden=true; $('#lock').classList.add('gone'); unlock.did=true; sstore('unlocked','1'); here=deep; routing=true; try{ openWin(deep); } finally{ routing=false; } return; }
+  if(location.pathname.length>1) history.replaceState(null,'','/'+q+location.hash);
   const fresh=true; // the intro plays on every load
   const hideLock=()=>{ $('#lock').hidden=true; $('#lock').classList.add('gone'); unlock.did=true; };
   if(/[?&]skip/.test(q) || !fresh || (reduce&&!forced)){ hideLock(); if(reduce&&!sstore('unlocked')) welcome(); return; }

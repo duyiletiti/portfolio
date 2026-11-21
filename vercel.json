@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/work/:slug", "destination": "/index.html" },
+    { "source": "/:page(finder|about|readme|board|photos|music|videos|prefs|calendar|notes|resume|mail|trash|aboutrose)", "destination": "/index.html" }
+  ]
+}
